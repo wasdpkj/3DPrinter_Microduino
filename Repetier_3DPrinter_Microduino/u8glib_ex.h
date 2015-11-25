@@ -199,10 +199,10 @@ extern "C" {
 #  define U8G_SECTION(name) __attribute__ ((section (name)))
 #  if defined(__MSPGCC__)
 /* mspgcc does not have .progmem sections. Use -fdata-sections. */
-#    define U8G_FONT_SECTION(name)
+#    define repetier_SECTION(name)
 #  endif
 #  if defined(__AVR__)
-#    define U8G_FONT_SECTION(name) U8G_SECTION(".progmem." name)
+#    define repetier_SECTION(name) U8G_SECTION(".progmem." name)
 #  endif
 #else
 #  define U8G_NOINLINE
@@ -211,8 +211,8 @@ extern "C" {
 #  define U8G_SECTION(name)
 #endif
 
-#ifndef U8G_FONT_SECTION
-#  define U8G_FONT_SECTION(name)
+#ifndef repetier_SECTION
+#  define repetier_SECTION(name)
 #endif
 
 
@@ -1027,7 +1027,7 @@ uint8_t u8g_dev_pbxh24_base_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *ar
 typedef void (*u8g_draw_cursor_fn)(u8g_t *u8g);
 
 /* vertical reference point calculation callback */
-typedef u8g_uint_t (*u8g_font_calc_vref_fnptr)(u8g_t *u8g);
+typedef u8g_uint_t (*repetier_calc_vref_fnptr)(u8g_t *u8g);
 
 /* state backup and restore procedure */
 typedef void (*u8g_state_cb)(uint8_t msg);
@@ -1082,9 +1082,9 @@ typedef void (*u8g_state_cb)(uint8_t msg);
 #define U8G_PIN_DUMMY 254
 #define U8G_PIN_NONE 255
 
-#define U8G_FONT_HEIGHT_MODE_TEXT 0
-#define U8G_FONT_HEIGHT_MODE_XTEXT 1
-#define U8G_FONT_HEIGHT_MODE_ALL 2
+#define repetier_HEIGHT_MODE_TEXT 0
+#define repetier_HEIGHT_MODE_XTEXT 1
+#define repetier_HEIGHT_MODE_ALL 2
 
 struct _u8g_t
 {
@@ -1108,7 +1108,7 @@ struct _u8g_t
   uint8_t glyph_width;
   uint8_t glyph_height;
 
-  u8g_font_calc_vref_fnptr font_calc_vref;
+  repetier_calc_vref_fnptr font_calc_vref;
   uint8_t font_height_mode;
   int8_t font_ref_ascent;
   int8_t font_ref_descent;
@@ -1235,9 +1235,9 @@ void u8g_SetScale2x2(u8g_t *u8g);
 
 /* u8g_font.c */
 
-size_t u8g_font_GetSize(const void *font);
-uint8_t u8g_font_GetFontStartEncoding(const void *font) U8G_NOINLINE;
-uint8_t u8g_font_GetFontEndEncoding(const void *font) U8G_NOINLINE;
+size_t repetier_GetSize(const void *font);
+uint8_t repetier_GetFontStartEncoding(const void *font) U8G_NOINLINE;
+uint8_t repetier_GetFontEndEncoding(const void *font) U8G_NOINLINE;
 
 void u8g_SetFont(u8g_t *u8g, const u8g_fntpgm_uint8_t *font);
 
@@ -1278,10 +1278,10 @@ void u8g_SetFontRefHeightExtendedText(u8g_t *u8g);
 void u8g_SetFontRefHeightAll(u8g_t *u8g);
 void u8g_SetFontLineSpacingFactor(u8g_t *u8g, uint8_t factor);
 
-u8g_uint_t u8g_font_calc_vref_font(u8g_t *u8g);
-u8g_uint_t u8g_font_calc_vref_bottom(u8g_t *u8g);
-u8g_uint_t u8g_font_calc_vref_top(u8g_t *u8g);
-u8g_uint_t u8g_font_calc_vref_center(u8g_t *u8g);
+u8g_uint_t repetier_calc_vref_font(u8g_t *u8g);
+u8g_uint_t repetier_calc_vref_bottom(u8g_t *u8g);
+u8g_uint_t repetier_calc_vref_top(u8g_t *u8g);
+u8g_uint_t repetier_calc_vref_center(u8g_t *u8g);
 
 void u8g_SetFontPosBaseline(u8g_t *u8g);
 void u8g_SetFontPosBottom(u8g_t *u8g);
@@ -1447,90 +1447,90 @@ void chess_Step(uint8_t keycode);
 
 /*===============================================================*/
 /* font definitions */
-extern const u8g_fntpgm_uint8_t u8g_font_m2icon_5[] U8G_FONT_SECTION("u8g_font_m2icon_5");
-extern const u8g_fntpgm_uint8_t u8g_font_m2icon_7[] U8G_FONT_SECTION("u8g_font_m2icon_7");
-extern const u8g_fntpgm_uint8_t u8g_font_m2icon_9[] U8G_FONT_SECTION("u8g_font_m2icon_9");
+extern const u8g_fntpgm_uint8_t repetier_m2icon_5[] repetier_SECTION("repetier_m2icon_5");
+extern const u8g_fntpgm_uint8_t repetier_m2icon_7[] repetier_SECTION("repetier_m2icon_7");
+extern const u8g_fntpgm_uint8_t repetier_m2icon_9[] repetier_SECTION("repetier_m2icon_9");
 
-extern const u8g_fntpgm_uint8_t u8g_font_u8glib_4[] U8G_FONT_SECTION("u8g_font_u8glib_4");
-extern const u8g_fntpgm_uint8_t u8g_font_u8glib_4r[] U8G_FONT_SECTION("u8g_font_u8glib_4r");
+extern const u8g_fntpgm_uint8_t repetier_u8glib_4[] repetier_SECTION("repetier_u8glib_4");
+extern const u8g_fntpgm_uint8_t repetier_u8glib_4r[] repetier_SECTION("repetier_u8glib_4r");
 
 
-extern const u8g_fntpgm_uint8_t u8g_font_6x12_75r[] U8G_FONT_SECTION("u8g_font_6x12_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13_75r[] U8G_FONT_SECTION("u8g_font_6x13_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13_75r[] U8G_FONT_SECTION("u8g_font_7x13_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13_75r[] U8G_FONT_SECTION("u8g_font_8x13_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_9x15_75r[] U8G_FONT_SECTION("u8g_font_9x15_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_9x18_75r[] U8G_FONT_SECTION("u8g_font_9x18_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_cu12_75r[] U8G_FONT_SECTION("u8g_font_cu12_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_75r[] U8G_FONT_SECTION("u8g_font_unifont_75r");
-extern const u8g_fntpgm_uint8_t u8g_font_10x20_75r[] U8G_FONT_SECTION("u8g_font_10x20_75r");
+extern const u8g_fntpgm_uint8_t repetier_6x12_75r[] repetier_SECTION("repetier_6x12_75r");
+extern const u8g_fntpgm_uint8_t repetier_6x13_75r[] repetier_SECTION("repetier_6x13_75r");
+extern const u8g_fntpgm_uint8_t repetier_7x13_75r[] repetier_SECTION("repetier_7x13_75r");
+extern const u8g_fntpgm_uint8_t repetier_8x13_75r[] repetier_SECTION("repetier_8x13_75r");
+extern const u8g_fntpgm_uint8_t repetier_9x15_75r[] repetier_SECTION("repetier_9x15_75r");
+extern const u8g_fntpgm_uint8_t repetier_9x18_75r[] repetier_SECTION("repetier_9x18_75r");
+extern const u8g_fntpgm_uint8_t repetier_cu12_75r[] repetier_SECTION("repetier_cu12_75r");
+extern const u8g_fntpgm_uint8_t repetier_unifont_75r[] repetier_SECTION("repetier_unifont_75r");
+extern const u8g_fntpgm_uint8_t repetier_10x20_75r[] repetier_SECTION("repetier_10x20_75r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_10x20_67_75[] U8G_FONT_SECTION("u8g_font_10x20_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_10x20_78_79[] U8G_FONT_SECTION("u8g_font_10x20_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_10x20[] U8G_FONT_SECTION("u8g_font_10x20");
-extern const u8g_fntpgm_uint8_t u8g_font_10x20r[] U8G_FONT_SECTION("u8g_font_10x20r");
-extern const u8g_fntpgm_uint8_t u8g_font_4x6[] U8G_FONT_SECTION("u8g_font_4x6");
-extern const u8g_fntpgm_uint8_t u8g_font_4x6r[] U8G_FONT_SECTION("u8g_font_4x6r");
-//extern const u8g_fntpgm_uint8_t u8g_font_4x6n[] U8G_FONT_SECTION("u8g_font_4x6n");
-extern const u8g_fntpgm_uint8_t u8g_font_5x7[] U8G_FONT_SECTION("u8g_font_5x7");
-extern const u8g_fntpgm_uint8_t u8g_font_5x7r[] U8G_FONT_SECTION("u8g_font_5x7r");
-extern const u8g_fntpgm_uint8_t u8g_font_5x8[] U8G_FONT_SECTION("u8g_font_5x8");
-extern const u8g_fntpgm_uint8_t u8g_font_5x8r[] U8G_FONT_SECTION("u8g_font_5x8r");
-extern const u8g_fntpgm_uint8_t u8g_font_6x10[] U8G_FONT_SECTION("u8g_font_6x10");
-extern const u8g_fntpgm_uint8_t u8g_font_6x10r[] U8G_FONT_SECTION("u8g_font_6x10r");
-extern const u8g_fntpgm_uint8_t u8g_font_6x12_67_75[] U8G_FONT_SECTION("u8g_font_6x12_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_6x12_78_79[] U8G_FONT_SECTION("u8g_font_6x12_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_6x12[] U8G_FONT_SECTION("u8g_font_6x12");
-extern const u8g_fntpgm_uint8_t u8g_font_6x12r[] U8G_FONT_SECTION("u8g_font_6x12r");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13_67_75[] U8G_FONT_SECTION("u8g_font_6x13_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13_78_79[] U8G_FONT_SECTION("u8g_font_6x13_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13B[] U8G_FONT_SECTION("u8g_font_6x13B");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13Br[] U8G_FONT_SECTION("u8g_font_6x13Br");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13[] U8G_FONT_SECTION("u8g_font_6x13");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13r[] U8G_FONT_SECTION("u8g_font_6x13r");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13O[] U8G_FONT_SECTION("u8g_font_6x13O");
-extern const u8g_fntpgm_uint8_t u8g_font_6x13Or[] U8G_FONT_SECTION("u8g_font_6x13Or");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13_67_75[] U8G_FONT_SECTION("u8g_font_7x13_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13_78_79[] U8G_FONT_SECTION("u8g_font_7x13_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13B[] U8G_FONT_SECTION("u8g_font_7x13B");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13Br[] U8G_FONT_SECTION("u8g_font_7x13Br");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13[] U8G_FONT_SECTION("u8g_font_7x13");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13r[] U8G_FONT_SECTION("u8g_font_7x13r");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13O[] U8G_FONT_SECTION("u8g_font_7x13O");
-extern const u8g_fntpgm_uint8_t u8g_font_7x13Or[] U8G_FONT_SECTION("u8g_font_7x13Or");
-extern const u8g_fntpgm_uint8_t u8g_font_7x14B[] U8G_FONT_SECTION("u8g_font_7x14B");
-extern const u8g_fntpgm_uint8_t u8g_font_7x14Br[] U8G_FONT_SECTION("u8g_font_7x14Br");
-extern const u8g_fntpgm_uint8_t u8g_font_7x14[] U8G_FONT_SECTION("u8g_font_7x14");
-extern const u8g_fntpgm_uint8_t u8g_font_7x14r[] U8G_FONT_SECTION("u8g_font_7x14r");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13_67_75[] U8G_FONT_SECTION("u8g_font_8x13_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13B[] U8G_FONT_SECTION("u8g_font_8x13B");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13Br[] U8G_FONT_SECTION("u8g_font_8x13Br");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13[] U8G_FONT_SECTION("u8g_font_8x13");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13r[] U8G_FONT_SECTION("u8g_font_8x13r");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13O[] U8G_FONT_SECTION("u8g_font_8x13O");
-extern const u8g_fntpgm_uint8_t u8g_font_8x13Or[] U8G_FONT_SECTION("u8g_font_8x13Or");
+extern const u8g_fntpgm_uint8_t repetier_10x20_67_75[] repetier_SECTION("repetier_10x20_67_75");
+extern const u8g_fntpgm_uint8_t repetier_10x20_78_79[] repetier_SECTION("repetier_10x20_78_79");
+extern const u8g_fntpgm_uint8_t repetier_10x20[] repetier_SECTION("repetier_10x20");
+extern const u8g_fntpgm_uint8_t repetier_10x20r[] repetier_SECTION("repetier_10x20r");
+extern const u8g_fntpgm_uint8_t repetier_4x6[] repetier_SECTION("repetier_4x6");
+extern const u8g_fntpgm_uint8_t repetier_4x6r[] repetier_SECTION("repetier_4x6r");
+//extern const u8g_fntpgm_uint8_t repetier_4x6n[] repetier_SECTION("repetier_4x6n");
+extern const u8g_fntpgm_uint8_t repetier_5x7[] repetier_SECTION("repetier_5x7");
+extern const u8g_fntpgm_uint8_t repetier_5x7r[] repetier_SECTION("repetier_5x7r");
+extern const u8g_fntpgm_uint8_t repetier_5x8[] repetier_SECTION("repetier_5x8");
+extern const u8g_fntpgm_uint8_t repetier_5x8r[] repetier_SECTION("repetier_5x8r");
+extern const u8g_fntpgm_uint8_t repetier_6x10[] repetier_SECTION("repetier_6x10");
+extern const u8g_fntpgm_uint8_t repetier_6x10r[] repetier_SECTION("repetier_6x10r");
+extern const u8g_fntpgm_uint8_t repetier_6x12_67_75[] repetier_SECTION("repetier_6x12_67_75");
+extern const u8g_fntpgm_uint8_t repetier_6x12_78_79[] repetier_SECTION("repetier_6x12_78_79");
+extern const u8g_fntpgm_uint8_t repetier_6x12[] repetier_SECTION("repetier_6x12");
+extern const u8g_fntpgm_uint8_t repetier_6x12r[] repetier_SECTION("repetier_6x12r");
+extern const u8g_fntpgm_uint8_t repetier_6x13_67_75[] repetier_SECTION("repetier_6x13_67_75");
+extern const u8g_fntpgm_uint8_t repetier_6x13_78_79[] repetier_SECTION("repetier_6x13_78_79");
+extern const u8g_fntpgm_uint8_t repetier_6x13B[] repetier_SECTION("repetier_6x13B");
+extern const u8g_fntpgm_uint8_t repetier_6x13Br[] repetier_SECTION("repetier_6x13Br");
+extern const u8g_fntpgm_uint8_t repetier_6x13[] repetier_SECTION("repetier_6x13");
+extern const u8g_fntpgm_uint8_t repetier_6x13r[] repetier_SECTION("repetier_6x13r");
+extern const u8g_fntpgm_uint8_t repetier_6x13O[] repetier_SECTION("repetier_6x13O");
+extern const u8g_fntpgm_uint8_t repetier_6x13Or[] repetier_SECTION("repetier_6x13Or");
+extern const u8g_fntpgm_uint8_t repetier_7x13_67_75[] repetier_SECTION("repetier_7x13_67_75");
+extern const u8g_fntpgm_uint8_t repetier_7x13_78_79[] repetier_SECTION("repetier_7x13_78_79");
+extern const u8g_fntpgm_uint8_t repetier_7x13B[] repetier_SECTION("repetier_7x13B");
+extern const u8g_fntpgm_uint8_t repetier_7x13Br[] repetier_SECTION("repetier_7x13Br");
+extern const u8g_fntpgm_uint8_t repetier_7x13[] repetier_SECTION("repetier_7x13");
+extern const u8g_fntpgm_uint8_t repetier_7x13r[] repetier_SECTION("repetier_7x13r");
+extern const u8g_fntpgm_uint8_t repetier_7x13O[] repetier_SECTION("repetier_7x13O");
+extern const u8g_fntpgm_uint8_t repetier_7x13Or[] repetier_SECTION("repetier_7x13Or");
+extern const u8g_fntpgm_uint8_t repetier_7x14B[] repetier_SECTION("repetier_7x14B");
+extern const u8g_fntpgm_uint8_t repetier_7x14Br[] repetier_SECTION("repetier_7x14Br");
+extern const u8g_fntpgm_uint8_t repetier_7x14[] repetier_SECTION("repetier_7x14");
+extern const u8g_fntpgm_uint8_t repetier_7x14r[] repetier_SECTION("repetier_7x14r");
+extern const u8g_fntpgm_uint8_t repetier_8x13_67_75[] repetier_SECTION("repetier_8x13_67_75");
+extern const u8g_fntpgm_uint8_t repetier_8x13B[] repetier_SECTION("repetier_8x13B");
+extern const u8g_fntpgm_uint8_t repetier_8x13Br[] repetier_SECTION("repetier_8x13Br");
+extern const u8g_fntpgm_uint8_t repetier_8x13[] repetier_SECTION("repetier_8x13");
+extern const u8g_fntpgm_uint8_t repetier_8x13r[] repetier_SECTION("repetier_8x13r");
+extern const u8g_fntpgm_uint8_t repetier_8x13O[] repetier_SECTION("repetier_8x13O");
+extern const u8g_fntpgm_uint8_t repetier_8x13Or[] repetier_SECTION("repetier_8x13Or");
 
-extern const u8g_fntpgm_uint8_t u8g_font_9x15_67_75[] U8G_FONT_SECTION("u8g_font_9x15_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_9x15_78_79[] U8G_FONT_SECTION("u8g_font_9x15_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_9x15B[] U8G_FONT_SECTION("u8g_font_9x15B");
-extern const u8g_fntpgm_uint8_t u8g_font_9x15Br[] U8G_FONT_SECTION("u8g_font_9x15Br");
-extern const u8g_fntpgm_uint8_t u8g_font_9x15[] U8G_FONT_SECTION("u8g_font_9x15");
-extern const u8g_fntpgm_uint8_t u8g_font_9x15r[] U8G_FONT_SECTION("u8g_font_9x15r");
+extern const u8g_fntpgm_uint8_t repetier_9x15_67_75[] repetier_SECTION("repetier_9x15_67_75");
+extern const u8g_fntpgm_uint8_t repetier_9x15_78_79[] repetier_SECTION("repetier_9x15_78_79");
+extern const u8g_fntpgm_uint8_t repetier_9x15B[] repetier_SECTION("repetier_9x15B");
+extern const u8g_fntpgm_uint8_t repetier_9x15Br[] repetier_SECTION("repetier_9x15Br");
+extern const u8g_fntpgm_uint8_t repetier_9x15[] repetier_SECTION("repetier_9x15");
+extern const u8g_fntpgm_uint8_t repetier_9x15r[] repetier_SECTION("repetier_9x15r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_9x18_67_75[] U8G_FONT_SECTION("u8g_font_9x18_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_9x18_78_79[] U8G_FONT_SECTION("u8g_font_9x18_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_9x18B[] U8G_FONT_SECTION("u8g_font_9x18B");
-extern const u8g_fntpgm_uint8_t u8g_font_9x18[] U8G_FONT_SECTION("u8g_font_9x18");
-extern const u8g_fntpgm_uint8_t u8g_font_9x18Br[] U8G_FONT_SECTION("u8g_font_9x18Br");
-extern const u8g_fntpgm_uint8_t u8g_font_9x18r[] U8G_FONT_SECTION("u8g_font_9x18r");
+extern const u8g_fntpgm_uint8_t repetier_9x18_67_75[] repetier_SECTION("repetier_9x18_67_75");
+extern const u8g_fntpgm_uint8_t repetier_9x18_78_79[] repetier_SECTION("repetier_9x18_78_79");
+extern const u8g_fntpgm_uint8_t repetier_9x18B[] repetier_SECTION("repetier_9x18B");
+extern const u8g_fntpgm_uint8_t repetier_9x18[] repetier_SECTION("repetier_9x18");
+extern const u8g_fntpgm_uint8_t repetier_9x18Br[] repetier_SECTION("repetier_9x18Br");
+extern const u8g_fntpgm_uint8_t repetier_9x18r[] repetier_SECTION("repetier_9x18r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_cursor[] U8G_FONT_SECTION("u8g_font_cursor");
-extern const u8g_fntpgm_uint8_t u8g_font_cursorr[] U8G_FONT_SECTION("u8g_font_cursorr");
-extern const u8g_fntpgm_uint8_t u8g_font_micro[] U8G_FONT_SECTION("u8g_font_micro");
+extern const u8g_fntpgm_uint8_t repetier_cursor[] repetier_SECTION("repetier_cursor");
+extern const u8g_fntpgm_uint8_t repetier_cursorr[] repetier_SECTION("repetier_cursorr");
+extern const u8g_fntpgm_uint8_t repetier_micro[] repetier_SECTION("repetier_micro");
 
-extern const u8g_fntpgm_uint8_t u8g_font_cu12_67_75[] U8G_FONT_SECTION("u8g_font_cu12_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_cu12_78_79[] U8G_FONT_SECTION("u8g_font_cu12_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_cu12[] U8G_FONT_SECTION("u8g_font_cu12");
+extern const u8g_fntpgm_uint8_t repetier_cu12_67_75[] repetier_SECTION("repetier_cu12_67_75");
+extern const u8g_fntpgm_uint8_t repetier_cu12_78_79[] repetier_SECTION("repetier_cu12_78_79");
+extern const u8g_fntpgm_uint8_t repetier_cu12[] repetier_SECTION("repetier_cu12");
 
 /*
   Free-Universal Bold
@@ -1539,27 +1539,27 @@ extern const u8g_fntpgm_uint8_t u8g_font_cu12[] U8G_FONT_SECTION("u8g_font_cu12"
   no char: Full set (codes 32 - 255)
 */
 
-extern const u8g_fntpgm_uint8_t u8g_font_fub11[] U8G_FONT_SECTION("u8g_font_fub11");
-extern const u8g_fntpgm_uint8_t u8g_font_fub11r[] U8G_FONT_SECTION("u8g_font_fub11r");
-extern const u8g_fntpgm_uint8_t u8g_font_fub11n[] U8G_FONT_SECTION("u8g_font_fub11n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub14[] U8G_FONT_SECTION("u8g_font_fub14");
-extern const u8g_fntpgm_uint8_t u8g_font_fub14r[] U8G_FONT_SECTION("u8g_font_fub14r");
-extern const u8g_fntpgm_uint8_t u8g_font_fub14n[] U8G_FONT_SECTION("u8g_font_fub14n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub17[] U8G_FONT_SECTION("u8g_font_fub17");
-extern const u8g_fntpgm_uint8_t u8g_font_fub17r[] U8G_FONT_SECTION("u8g_font_fub17r");
-extern const u8g_fntpgm_uint8_t u8g_font_fub17n[] U8G_FONT_SECTION("u8g_font_fub17n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub20[] U8G_FONT_SECTION("u8g_font_fub20");
-extern const u8g_fntpgm_uint8_t u8g_font_fub20r[] U8G_FONT_SECTION("u8g_font_fub20r");
-extern const u8g_fntpgm_uint8_t u8g_font_fub20n[] U8G_FONT_SECTION("u8g_font_fub20n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub25[] U8G_FONT_SECTION("u8g_font_fub25");
-extern const u8g_fntpgm_uint8_t u8g_font_fub25r[] U8G_FONT_SECTION("u8g_font_fub25r");
-extern const u8g_fntpgm_uint8_t u8g_font_fub25n[] U8G_FONT_SECTION("u8g_font_fub25n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub30[] U8G_FONT_SECTION("u8g_font_fub30");
-extern const u8g_fntpgm_uint8_t u8g_font_fub30r[] U8G_FONT_SECTION("u8g_font_fub30r");
-extern const u8g_fntpgm_uint8_t u8g_font_fub30n[] U8G_FONT_SECTION("u8g_font_fub30n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub35n[] U8G_FONT_SECTION("u8g_font_fub35n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub42n[] U8G_FONT_SECTION("u8g_font_fub42n");
-extern const u8g_fntpgm_uint8_t u8g_font_fub49n[] U8G_FONT_SECTION("u8g_font_fub49n");
+extern const u8g_fntpgm_uint8_t repetier_fub11[] repetier_SECTION("repetier_fub11");
+extern const u8g_fntpgm_uint8_t repetier_fub11r[] repetier_SECTION("repetier_fub11r");
+extern const u8g_fntpgm_uint8_t repetier_fub11n[] repetier_SECTION("repetier_fub11n");
+extern const u8g_fntpgm_uint8_t repetier_fub14[] repetier_SECTION("repetier_fub14");
+extern const u8g_fntpgm_uint8_t repetier_fub14r[] repetier_SECTION("repetier_fub14r");
+extern const u8g_fntpgm_uint8_t repetier_fub14n[] repetier_SECTION("repetier_fub14n");
+extern const u8g_fntpgm_uint8_t repetier_fub17[] repetier_SECTION("repetier_fub17");
+extern const u8g_fntpgm_uint8_t repetier_fub17r[] repetier_SECTION("repetier_fub17r");
+extern const u8g_fntpgm_uint8_t repetier_fub17n[] repetier_SECTION("repetier_fub17n");
+extern const u8g_fntpgm_uint8_t repetier_fub20[] repetier_SECTION("repetier_fub20");
+extern const u8g_fntpgm_uint8_t repetier_fub20r[] repetier_SECTION("repetier_fub20r");
+extern const u8g_fntpgm_uint8_t repetier_fub20n[] repetier_SECTION("repetier_fub20n");
+extern const u8g_fntpgm_uint8_t repetier_fub25[] repetier_SECTION("repetier_fub25");
+extern const u8g_fntpgm_uint8_t repetier_fub25r[] repetier_SECTION("repetier_fub25r");
+extern const u8g_fntpgm_uint8_t repetier_fub25n[] repetier_SECTION("repetier_fub25n");
+extern const u8g_fntpgm_uint8_t repetier_fub30[] repetier_SECTION("repetier_fub30");
+extern const u8g_fntpgm_uint8_t repetier_fub30r[] repetier_SECTION("repetier_fub30r");
+extern const u8g_fntpgm_uint8_t repetier_fub30n[] repetier_SECTION("repetier_fub30n");
+extern const u8g_fntpgm_uint8_t repetier_fub35n[] repetier_SECTION("repetier_fub35n");
+extern const u8g_fntpgm_uint8_t repetier_fub42n[] repetier_SECTION("repetier_fub42n");
+extern const u8g_fntpgm_uint8_t repetier_fub49n[] repetier_SECTION("repetier_fub49n");
 
 /*
   Free-Universal Regular
@@ -1568,27 +1568,27 @@ extern const u8g_fntpgm_uint8_t u8g_font_fub49n[] U8G_FONT_SECTION("u8g_font_fub
   no char: Full set (codes 32 - 255)
 */
 
-extern const u8g_fntpgm_uint8_t u8g_font_fur11[] U8G_FONT_SECTION("u8g_font_fur11");
-extern const u8g_fntpgm_uint8_t u8g_font_fur11r[] U8G_FONT_SECTION("u8g_font_fur11r");
-extern const u8g_fntpgm_uint8_t u8g_font_fur11n[] U8G_FONT_SECTION("u8g_font_fur11n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur14[] U8G_FONT_SECTION("u8g_font_fur14");
-extern const u8g_fntpgm_uint8_t u8g_font_fur14r[] U8G_FONT_SECTION("u8g_font_fur14r");
-extern const u8g_fntpgm_uint8_t u8g_font_fur14n[] U8G_FONT_SECTION("u8g_font_fur14n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur17[] U8G_FONT_SECTION("u8g_font_fur17");
-extern const u8g_fntpgm_uint8_t u8g_font_fur17r[] U8G_FONT_SECTION("u8g_font_fur17r");
-extern const u8g_fntpgm_uint8_t u8g_font_fur17n[] U8G_FONT_SECTION("u8g_font_fur17n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur20[] U8G_FONT_SECTION("u8g_font_fur20");
-extern const u8g_fntpgm_uint8_t u8g_font_fur20r[] U8G_FONT_SECTION("u8g_font_fur20r");
-extern const u8g_fntpgm_uint8_t u8g_font_fur20n[] U8G_FONT_SECTION("u8g_font_fur20n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur25[] U8G_FONT_SECTION("u8g_font_fur25");
-extern const u8g_fntpgm_uint8_t u8g_font_fur25r[] U8G_FONT_SECTION("u8g_font_fur25r");
-extern const u8g_fntpgm_uint8_t u8g_font_fur25n[] U8G_FONT_SECTION("u8g_font_fur25n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur30[] U8G_FONT_SECTION("u8g_font_fur30");
-extern const u8g_fntpgm_uint8_t u8g_font_fur30r[] U8G_FONT_SECTION("u8g_font_fur30r");
-extern const u8g_fntpgm_uint8_t u8g_font_fur30n[] U8G_FONT_SECTION("u8g_font_fur30n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur35n[] U8G_FONT_SECTION("u8g_font_fur35n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur42n[] U8G_FONT_SECTION("u8g_font_fur42n");
-extern const u8g_fntpgm_uint8_t u8g_font_fur49n[] U8G_FONT_SECTION("u8g_font_fur49n");
+extern const u8g_fntpgm_uint8_t repetier_fur11[] repetier_SECTION("repetier_fur11");
+extern const u8g_fntpgm_uint8_t repetier_fur11r[] repetier_SECTION("repetier_fur11r");
+extern const u8g_fntpgm_uint8_t repetier_fur11n[] repetier_SECTION("repetier_fur11n");
+extern const u8g_fntpgm_uint8_t repetier_fur14[] repetier_SECTION("repetier_fur14");
+extern const u8g_fntpgm_uint8_t repetier_fur14r[] repetier_SECTION("repetier_fur14r");
+extern const u8g_fntpgm_uint8_t repetier_fur14n[] repetier_SECTION("repetier_fur14n");
+extern const u8g_fntpgm_uint8_t repetier_fur17[] repetier_SECTION("repetier_fur17");
+extern const u8g_fntpgm_uint8_t repetier_fur17r[] repetier_SECTION("repetier_fur17r");
+extern const u8g_fntpgm_uint8_t repetier_fur17n[] repetier_SECTION("repetier_fur17n");
+extern const u8g_fntpgm_uint8_t repetier_fur20[] repetier_SECTION("repetier_fur20");
+extern const u8g_fntpgm_uint8_t repetier_fur20r[] repetier_SECTION("repetier_fur20r");
+extern const u8g_fntpgm_uint8_t repetier_fur20n[] repetier_SECTION("repetier_fur20n");
+extern const u8g_fntpgm_uint8_t repetier_fur25[] repetier_SECTION("repetier_fur25");
+extern const u8g_fntpgm_uint8_t repetier_fur25r[] repetier_SECTION("repetier_fur25r");
+extern const u8g_fntpgm_uint8_t repetier_fur25n[] repetier_SECTION("repetier_fur25n");
+extern const u8g_fntpgm_uint8_t repetier_fur30[] repetier_SECTION("repetier_fur30");
+extern const u8g_fntpgm_uint8_t repetier_fur30r[] repetier_SECTION("repetier_fur30r");
+extern const u8g_fntpgm_uint8_t repetier_fur30n[] repetier_SECTION("repetier_fur30n");
+extern const u8g_fntpgm_uint8_t repetier_fur35n[] repetier_SECTION("repetier_fur35n");
+extern const u8g_fntpgm_uint8_t repetier_fur42n[] repetier_SECTION("repetier_fur42n");
+extern const u8g_fntpgm_uint8_t repetier_fur49n[] repetier_SECTION("repetier_fur49n");
 
 /*
   Gentium Bold
@@ -1597,29 +1597,29 @@ extern const u8g_fntpgm_uint8_t u8g_font_fur49n[] U8G_FONT_SECTION("u8g_font_fur
   no char: Full set (codes 32 - 255)
 */
 
-extern const u8g_fntpgm_uint8_t u8g_font_gdb11[] U8G_FONT_SECTION("u8g_font_gdb11");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb12[] U8G_FONT_SECTION("u8g_font_gdb12");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb14[] U8G_FONT_SECTION("u8g_font_gdb14");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb17[] U8G_FONT_SECTION("u8g_font_gdb17");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb20[] U8G_FONT_SECTION("u8g_font_gdb20");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb25[] U8G_FONT_SECTION("u8g_font_gdb25");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb30[] U8G_FONT_SECTION("u8g_font_gdb30");
+extern const u8g_fntpgm_uint8_t repetier_gdb11[] repetier_SECTION("repetier_gdb11");
+extern const u8g_fntpgm_uint8_t repetier_gdb12[] repetier_SECTION("repetier_gdb12");
+extern const u8g_fntpgm_uint8_t repetier_gdb14[] repetier_SECTION("repetier_gdb14");
+extern const u8g_fntpgm_uint8_t repetier_gdb17[] repetier_SECTION("repetier_gdb17");
+extern const u8g_fntpgm_uint8_t repetier_gdb20[] repetier_SECTION("repetier_gdb20");
+extern const u8g_fntpgm_uint8_t repetier_gdb25[] repetier_SECTION("repetier_gdb25");
+extern const u8g_fntpgm_uint8_t repetier_gdb30[] repetier_SECTION("repetier_gdb30");
 
-extern const u8g_fntpgm_uint8_t u8g_font_gdb11r[] U8G_FONT_SECTION("u8g_font_gdb11r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb12r[] U8G_FONT_SECTION("u8g_font_gdb12r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb14r[] U8G_FONT_SECTION("u8g_font_gdb14r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb17r[] U8G_FONT_SECTION("u8g_font_gdb17r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb20r[] U8G_FONT_SECTION("u8g_font_gdb20r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb25r[] U8G_FONT_SECTION("u8g_font_gdb25r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb30r[] U8G_FONT_SECTION("u8g_font_gdb30r");
+extern const u8g_fntpgm_uint8_t repetier_gdb11r[] repetier_SECTION("repetier_gdb11r");
+extern const u8g_fntpgm_uint8_t repetier_gdb12r[] repetier_SECTION("repetier_gdb12r");
+extern const u8g_fntpgm_uint8_t repetier_gdb14r[] repetier_SECTION("repetier_gdb14r");
+extern const u8g_fntpgm_uint8_t repetier_gdb17r[] repetier_SECTION("repetier_gdb17r");
+extern const u8g_fntpgm_uint8_t repetier_gdb20r[] repetier_SECTION("repetier_gdb20r");
+extern const u8g_fntpgm_uint8_t repetier_gdb25r[] repetier_SECTION("repetier_gdb25r");
+extern const u8g_fntpgm_uint8_t repetier_gdb30r[] repetier_SECTION("repetier_gdb30r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_gdb11n[] U8G_FONT_SECTION("u8g_font_gdb11n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb12n[] U8G_FONT_SECTION("u8g_font_gdb12n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb14n[] U8G_FONT_SECTION("u8g_font_gdb14n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb17n[] U8G_FONT_SECTION("u8g_font_gdb17n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb20n[] U8G_FONT_SECTION("u8g_font_gdb20n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb25n[] U8G_FONT_SECTION("u8g_font_gdb25n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdb30n[] U8G_FONT_SECTION("u8g_font_gdb30n");
+extern const u8g_fntpgm_uint8_t repetier_gdb11n[] repetier_SECTION("repetier_gdb11n");
+extern const u8g_fntpgm_uint8_t repetier_gdb12n[] repetier_SECTION("repetier_gdb12n");
+extern const u8g_fntpgm_uint8_t repetier_gdb14n[] repetier_SECTION("repetier_gdb14n");
+extern const u8g_fntpgm_uint8_t repetier_gdb17n[] repetier_SECTION("repetier_gdb17n");
+extern const u8g_fntpgm_uint8_t repetier_gdb20n[] repetier_SECTION("repetier_gdb20n");
+extern const u8g_fntpgm_uint8_t repetier_gdb25n[] repetier_SECTION("repetier_gdb25n");
+extern const u8g_fntpgm_uint8_t repetier_gdb30n[] repetier_SECTION("repetier_gdb30n");
 
 /*
   Gentium Regular
@@ -1628,35 +1628,35 @@ extern const u8g_fntpgm_uint8_t u8g_font_gdb30n[] U8G_FONT_SECTION("u8g_font_gdb
   no char: Full set (codes 32 - 255)
 */
 
-extern const u8g_fntpgm_uint8_t u8g_font_gdr9[] U8G_FONT_SECTION("u8g_font_gdr9");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr10[] U8G_FONT_SECTION("u8g_font_gdr10");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr11[] U8G_FONT_SECTION("u8g_font_gdr11");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr12[] U8G_FONT_SECTION("u8g_font_gdr12");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr14[] U8G_FONT_SECTION("u8g_font_gdr14");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr17[] U8G_FONT_SECTION("u8g_font_gdr17");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr20[] U8G_FONT_SECTION("u8g_font_gdr20");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr25[] U8G_FONT_SECTION("u8g_font_gdr25");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr30[] U8G_FONT_SECTION("u8g_font_gdr30");
+extern const u8g_fntpgm_uint8_t repetier_gdr9[] repetier_SECTION("repetier_gdr9");
+extern const u8g_fntpgm_uint8_t repetier_gdr10[] repetier_SECTION("repetier_gdr10");
+extern const u8g_fntpgm_uint8_t repetier_gdr11[] repetier_SECTION("repetier_gdr11");
+extern const u8g_fntpgm_uint8_t repetier_gdr12[] repetier_SECTION("repetier_gdr12");
+extern const u8g_fntpgm_uint8_t repetier_gdr14[] repetier_SECTION("repetier_gdr14");
+extern const u8g_fntpgm_uint8_t repetier_gdr17[] repetier_SECTION("repetier_gdr17");
+extern const u8g_fntpgm_uint8_t repetier_gdr20[] repetier_SECTION("repetier_gdr20");
+extern const u8g_fntpgm_uint8_t repetier_gdr25[] repetier_SECTION("repetier_gdr25");
+extern const u8g_fntpgm_uint8_t repetier_gdr30[] repetier_SECTION("repetier_gdr30");
 
-extern const u8g_fntpgm_uint8_t u8g_font_gdr9r[] U8G_FONT_SECTION("u8g_font_gdr9r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr10r[] U8G_FONT_SECTION("u8g_font_gdr10r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr11r[] U8G_FONT_SECTION("u8g_font_gdr11r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr12r[] U8G_FONT_SECTION("u8g_font_gdr12r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr14r[] U8G_FONT_SECTION("u8g_font_gdr14r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr17r[] U8G_FONT_SECTION("u8g_font_gdr17r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr20r[] U8G_FONT_SECTION("u8g_font_gdr20r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr25r[] U8G_FONT_SECTION("u8g_font_gdr25r");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr30r[] U8G_FONT_SECTION("u8g_font_gdr30r");
+extern const u8g_fntpgm_uint8_t repetier_gdr9r[] repetier_SECTION("repetier_gdr9r");
+extern const u8g_fntpgm_uint8_t repetier_gdr10r[] repetier_SECTION("repetier_gdr10r");
+extern const u8g_fntpgm_uint8_t repetier_gdr11r[] repetier_SECTION("repetier_gdr11r");
+extern const u8g_fntpgm_uint8_t repetier_gdr12r[] repetier_SECTION("repetier_gdr12r");
+extern const u8g_fntpgm_uint8_t repetier_gdr14r[] repetier_SECTION("repetier_gdr14r");
+extern const u8g_fntpgm_uint8_t repetier_gdr17r[] repetier_SECTION("repetier_gdr17r");
+extern const u8g_fntpgm_uint8_t repetier_gdr20r[] repetier_SECTION("repetier_gdr20r");
+extern const u8g_fntpgm_uint8_t repetier_gdr25r[] repetier_SECTION("repetier_gdr25r");
+extern const u8g_fntpgm_uint8_t repetier_gdr30r[] repetier_SECTION("repetier_gdr30r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_gdr9n[] U8G_FONT_SECTION("u8g_font_gdr9n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr10n[] U8G_FONT_SECTION("u8g_font_gdr10n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr11n[] U8G_FONT_SECTION("u8g_font_gdr11n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr12n[] U8G_FONT_SECTION("u8g_font_gdr12n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr14n[] U8G_FONT_SECTION("u8g_font_gdr14n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr17n[] U8G_FONT_SECTION("u8g_font_gdr17n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr20n[] U8G_FONT_SECTION("u8g_font_gdr20n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr25n[] U8G_FONT_SECTION("u8g_font_gdr25n");
-extern const u8g_fntpgm_uint8_t u8g_font_gdr30n[] U8G_FONT_SECTION("u8g_font_gdr30n");
+extern const u8g_fntpgm_uint8_t repetier_gdr9n[] repetier_SECTION("repetier_gdr9n");
+extern const u8g_fntpgm_uint8_t repetier_gdr10n[] repetier_SECTION("repetier_gdr10n");
+extern const u8g_fntpgm_uint8_t repetier_gdr11n[] repetier_SECTION("repetier_gdr11n");
+extern const u8g_fntpgm_uint8_t repetier_gdr12n[] repetier_SECTION("repetier_gdr12n");
+extern const u8g_fntpgm_uint8_t repetier_gdr14n[] repetier_SECTION("repetier_gdr14n");
+extern const u8g_fntpgm_uint8_t repetier_gdr17n[] repetier_SECTION("repetier_gdr17n");
+extern const u8g_fntpgm_uint8_t repetier_gdr20n[] repetier_SECTION("repetier_gdr20n");
+extern const u8g_fntpgm_uint8_t repetier_gdr25n[] repetier_SECTION("repetier_gdr25n");
+extern const u8g_fntpgm_uint8_t repetier_gdr30n[] repetier_SECTION("repetier_gdr30n");
 
 /*
   Old-Standard Bold
@@ -1665,23 +1665,23 @@ extern const u8g_fntpgm_uint8_t u8g_font_gdr30n[] U8G_FONT_SECTION("u8g_font_gdr
   no char: Full set (codes 32 - 255)
 */
 
-extern const u8g_fntpgm_uint8_t u8g_font_osb18[] U8G_FONT_SECTION("u8g_font_osb18");
-extern const u8g_fntpgm_uint8_t u8g_font_osb21[] U8G_FONT_SECTION("u8g_font_osb21");
-extern const u8g_fntpgm_uint8_t u8g_font_osb26[] U8G_FONT_SECTION("u8g_font_osb26");
-extern const u8g_fntpgm_uint8_t u8g_font_osb29[] U8G_FONT_SECTION("u8g_font_osb29");
-extern const u8g_fntpgm_uint8_t u8g_font_osb35[] U8G_FONT_SECTION("u8g_font_osb35");
+extern const u8g_fntpgm_uint8_t repetier_osb18[] repetier_SECTION("repetier_osb18");
+extern const u8g_fntpgm_uint8_t repetier_osb21[] repetier_SECTION("repetier_osb21");
+extern const u8g_fntpgm_uint8_t repetier_osb26[] repetier_SECTION("repetier_osb26");
+extern const u8g_fntpgm_uint8_t repetier_osb29[] repetier_SECTION("repetier_osb29");
+extern const u8g_fntpgm_uint8_t repetier_osb35[] repetier_SECTION("repetier_osb35");
 
-extern const u8g_fntpgm_uint8_t u8g_font_osb18r[] U8G_FONT_SECTION("u8g_font_osb18r");
-extern const u8g_fntpgm_uint8_t u8g_font_osb21r[] U8G_FONT_SECTION("u8g_font_osb21r");
-extern const u8g_fntpgm_uint8_t u8g_font_osb26r[] U8G_FONT_SECTION("u8g_font_osb26r");
-extern const u8g_fntpgm_uint8_t u8g_font_osb29r[] U8G_FONT_SECTION("u8g_font_osb29r");
-extern const u8g_fntpgm_uint8_t u8g_font_osb35r[] U8G_FONT_SECTION("u8g_font_osb35r");
+extern const u8g_fntpgm_uint8_t repetier_osb18r[] repetier_SECTION("repetier_osb18r");
+extern const u8g_fntpgm_uint8_t repetier_osb21r[] repetier_SECTION("repetier_osb21r");
+extern const u8g_fntpgm_uint8_t repetier_osb26r[] repetier_SECTION("repetier_osb26r");
+extern const u8g_fntpgm_uint8_t repetier_osb29r[] repetier_SECTION("repetier_osb29r");
+extern const u8g_fntpgm_uint8_t repetier_osb35r[] repetier_SECTION("repetier_osb35r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_osb18n[] U8G_FONT_SECTION("u8g_font_osb18n");
-extern const u8g_fntpgm_uint8_t u8g_font_osb21n[] U8G_FONT_SECTION("u8g_font_osb21n");
-extern const u8g_fntpgm_uint8_t u8g_font_osb26n[] U8G_FONT_SECTION("u8g_font_osb26n");
-extern const u8g_fntpgm_uint8_t u8g_font_osb29n[] U8G_FONT_SECTION("u8g_font_osb29n");
-extern const u8g_fntpgm_uint8_t u8g_font_osb35n[] U8G_FONT_SECTION("u8g_font_osb35n");
+extern const u8g_fntpgm_uint8_t repetier_osb18n[] repetier_SECTION("repetier_osb18n");
+extern const u8g_fntpgm_uint8_t repetier_osb21n[] repetier_SECTION("repetier_osb21n");
+extern const u8g_fntpgm_uint8_t repetier_osb26n[] repetier_SECTION("repetier_osb26n");
+extern const u8g_fntpgm_uint8_t repetier_osb29n[] repetier_SECTION("repetier_osb29n");
+extern const u8g_fntpgm_uint8_t repetier_osb35n[] repetier_SECTION("repetier_osb35n");
 
 /*
   Old-Standard Regular
@@ -1690,238 +1690,238 @@ extern const u8g_fntpgm_uint8_t u8g_font_osb35n[] U8G_FONT_SECTION("u8g_font_osb
   no char: Full set (codes 32 - 255)
 */
 
-extern const u8g_fntpgm_uint8_t u8g_font_osr18[] U8G_FONT_SECTION("u8g_font_osr18");
-extern const u8g_fntpgm_uint8_t u8g_font_osr21[] U8G_FONT_SECTION("u8g_font_osr21");
-extern const u8g_fntpgm_uint8_t u8g_font_osr26[] U8G_FONT_SECTION("u8g_font_osr26");
-extern const u8g_fntpgm_uint8_t u8g_font_osr29[] U8G_FONT_SECTION("u8g_font_osr29");
-extern const u8g_fntpgm_uint8_t u8g_font_osr35[] U8G_FONT_SECTION("u8g_font_osr35");
+extern const u8g_fntpgm_uint8_t repetier_osr18[] repetier_SECTION("repetier_osr18");
+extern const u8g_fntpgm_uint8_t repetier_osr21[] repetier_SECTION("repetier_osr21");
+extern const u8g_fntpgm_uint8_t repetier_osr26[] repetier_SECTION("repetier_osr26");
+extern const u8g_fntpgm_uint8_t repetier_osr29[] repetier_SECTION("repetier_osr29");
+extern const u8g_fntpgm_uint8_t repetier_osr35[] repetier_SECTION("repetier_osr35");
 
-extern const u8g_fntpgm_uint8_t u8g_font_osr18r[] U8G_FONT_SECTION("u8g_font_osr18r");
-extern const u8g_fntpgm_uint8_t u8g_font_osr21r[] U8G_FONT_SECTION("u8g_font_osr21r");
-extern const u8g_fntpgm_uint8_t u8g_font_osr26r[] U8G_FONT_SECTION("u8g_font_osr26r");
-extern const u8g_fntpgm_uint8_t u8g_font_osr29r[] U8G_FONT_SECTION("u8g_font_osr29r");
-extern const u8g_fntpgm_uint8_t u8g_font_osr35r[] U8G_FONT_SECTION("u8g_font_osr35r");
+extern const u8g_fntpgm_uint8_t repetier_osr18r[] repetier_SECTION("repetier_osr18r");
+extern const u8g_fntpgm_uint8_t repetier_osr21r[] repetier_SECTION("repetier_osr21r");
+extern const u8g_fntpgm_uint8_t repetier_osr26r[] repetier_SECTION("repetier_osr26r");
+extern const u8g_fntpgm_uint8_t repetier_osr29r[] repetier_SECTION("repetier_osr29r");
+extern const u8g_fntpgm_uint8_t repetier_osr35r[] repetier_SECTION("repetier_osr35r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_osr18n[] U8G_FONT_SECTION("u8g_font_osr18n");
-extern const u8g_fntpgm_uint8_t u8g_font_osr21n[] U8G_FONT_SECTION("u8g_font_osr21n");
-extern const u8g_fntpgm_uint8_t u8g_font_osr26n[] U8G_FONT_SECTION("u8g_font_osr26n");
-extern const u8g_fntpgm_uint8_t u8g_font_osr29n[] U8G_FONT_SECTION("u8g_font_osr29n");
-extern const u8g_fntpgm_uint8_t u8g_font_osr35n[] U8G_FONT_SECTION("u8g_font_osr35n");
+extern const u8g_fntpgm_uint8_t repetier_osr18n[] repetier_SECTION("repetier_osr18n");
+extern const u8g_fntpgm_uint8_t repetier_osr21n[] repetier_SECTION("repetier_osr21n");
+extern const u8g_fntpgm_uint8_t repetier_osr26n[] repetier_SECTION("repetier_osr26n");
+extern const u8g_fntpgm_uint8_t repetier_osr29n[] repetier_SECTION("repetier_osr29n");
+extern const u8g_fntpgm_uint8_t repetier_osr35n[] repetier_SECTION("repetier_osr35n");
 
-//extern const u8g_fntpgm_uint8_t u8g_font_osr41[] U8G_FONT_SECTION("u8g_font_osr41");
+//extern const u8g_fntpgm_uint8_t repetier_osr41[] repetier_SECTION("repetier_osr41");
 
 /* GNU unifont */
 
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_18_19[] U8G_FONT_SECTION("u8g_font_unifont_18_19");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_72_73[] U8G_FONT_SECTION("u8g_font_unifont_72_73");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_67_75[] U8G_FONT_SECTION("u8g_font_unifont_67_75");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_76[] U8G_FONT_SECTION("u8g_font_unifont_76");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_77[] U8G_FONT_SECTION("u8g_font_unifont_77");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_78_79[] U8G_FONT_SECTION("u8g_font_unifont_78_79");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_86[] U8G_FONT_SECTION("u8g_font_unifont_86");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont[] U8G_FONT_SECTION("u8g_font_unifont");
-extern const u8g_fntpgm_uint8_t u8g_font_unifontr[] U8G_FONT_SECTION("u8g_font_unifontr");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_0_8[] U8G_FONT_SECTION("u8g_font_unifont_0_8");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_2_3[] U8G_FONT_SECTION("u8g_font_unifont_2_3");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_4_5[] U8G_FONT_SECTION("u8g_font_unifont_4_5");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_8_9[] U8G_FONT_SECTION("u8g_font_unifont_8_9");
-extern const u8g_fntpgm_uint8_t u8g_font_unifont_12_13[] U8G_FONT_SECTION("u8g_font_unifont_12_13");
+extern const u8g_fntpgm_uint8_t repetier_unifont_18_19[] repetier_SECTION("repetier_unifont_18_19");
+extern const u8g_fntpgm_uint8_t repetier_unifont_72_73[] repetier_SECTION("repetier_unifont_72_73");
+extern const u8g_fntpgm_uint8_t repetier_unifont_67_75[] repetier_SECTION("repetier_unifont_67_75");
+extern const u8g_fntpgm_uint8_t repetier_unifont_76[] repetier_SECTION("repetier_unifont_76");
+extern const u8g_fntpgm_uint8_t repetier_unifont_77[] repetier_SECTION("repetier_unifont_77");
+extern const u8g_fntpgm_uint8_t repetier_unifont_78_79[] repetier_SECTION("repetier_unifont_78_79");
+extern const u8g_fntpgm_uint8_t repetier_unifont_86[] repetier_SECTION("repetier_unifont_86");
+extern const u8g_fntpgm_uint8_t repetier_unifont[] repetier_SECTION("repetier_unifont");
+extern const u8g_fntpgm_uint8_t repetier_unifontr[] repetier_SECTION("repetier_unifontr");
+extern const u8g_fntpgm_uint8_t repetier_unifont_0_8[] repetier_SECTION("repetier_unifont_0_8");
+extern const u8g_fntpgm_uint8_t repetier_unifont_2_3[] repetier_SECTION("repetier_unifont_2_3");
+extern const u8g_fntpgm_uint8_t repetier_unifont_4_5[] repetier_SECTION("repetier_unifont_4_5");
+extern const u8g_fntpgm_uint8_t repetier_unifont_8_9[] repetier_SECTION("repetier_unifont_8_9");
+extern const u8g_fntpgm_uint8_t repetier_unifont_12_13[] repetier_SECTION("repetier_unifont_12_13");
 
 
 /* 04b fonts */
 
-extern const u8g_fntpgm_uint8_t u8g_font_04b_03b[] U8G_FONT_SECTION("u8g_font_04b_03b");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_03bn[] U8G_FONT_SECTION("u8g_font_04b_03bn");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_03br[] U8G_FONT_SECTION("u8g_font_04b_03br");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_03[] U8G_FONT_SECTION("u8g_font_04b_03");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_03n[] U8G_FONT_SECTION("u8g_font_04b_03n");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_03r[] U8G_FONT_SECTION("u8g_font_04b_03r");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_24[] U8G_FONT_SECTION("u8g_font_04b_24");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_24n[] U8G_FONT_SECTION("u8g_font_04b_24n");
-extern const u8g_fntpgm_uint8_t u8g_font_04b_24r[] U8G_FONT_SECTION("u8g_font_04b_24r");
+extern const u8g_fntpgm_uint8_t repetier_04b_03b[] repetier_SECTION("repetier_04b_03b");
+extern const u8g_fntpgm_uint8_t repetier_04b_03bn[] repetier_SECTION("repetier_04b_03bn");
+extern const u8g_fntpgm_uint8_t repetier_04b_03br[] repetier_SECTION("repetier_04b_03br");
+extern const u8g_fntpgm_uint8_t repetier_04b_03[] repetier_SECTION("repetier_04b_03");
+extern const u8g_fntpgm_uint8_t repetier_04b_03n[] repetier_SECTION("repetier_04b_03n");
+extern const u8g_fntpgm_uint8_t repetier_04b_03r[] repetier_SECTION("repetier_04b_03r");
+extern const u8g_fntpgm_uint8_t repetier_04b_24[] repetier_SECTION("repetier_04b_24");
+extern const u8g_fntpgm_uint8_t repetier_04b_24n[] repetier_SECTION("repetier_04b_24n");
+extern const u8g_fntpgm_uint8_t repetier_04b_24r[] repetier_SECTION("repetier_04b_24r");
 
 /* orgdot fonts */
 
-extern const u8g_fntpgm_uint8_t u8g_font_orgv01[] U8G_FONT_SECTION("u8g_font_orgv01");
-extern const u8g_fntpgm_uint8_t u8g_font_orgv01r[] U8G_FONT_SECTION("u8g_font_orgv01r");
-extern const u8g_fntpgm_uint8_t u8g_font_orgv01n[] U8G_FONT_SECTION("u8g_font_orgv01n");
+extern const u8g_fntpgm_uint8_t repetier_orgv01[] repetier_SECTION("repetier_orgv01");
+extern const u8g_fntpgm_uint8_t repetier_orgv01r[] repetier_SECTION("repetier_orgv01r");
+extern const u8g_fntpgm_uint8_t repetier_orgv01n[] repetier_SECTION("repetier_orgv01n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_fixed_v0[] U8G_FONT_SECTION("u8g_font_fixed_v0");
-extern const u8g_fntpgm_uint8_t u8g_font_fixed_v0r[] U8G_FONT_SECTION("u8g_font_fixed_v0r");
-extern const u8g_fntpgm_uint8_t u8g_font_fixed_v0n[] U8G_FONT_SECTION("u8g_font_fixed_v0n");
+extern const u8g_fntpgm_uint8_t repetier_fixed_v0[] repetier_SECTION("repetier_fixed_v0");
+extern const u8g_fntpgm_uint8_t repetier_fixed_v0r[] repetier_SECTION("repetier_fixed_v0r");
+extern const u8g_fntpgm_uint8_t repetier_fixed_v0n[] repetier_SECTION("repetier_fixed_v0n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_tpssb[] U8G_FONT_SECTION("u8g_font_tpssb");
-extern const u8g_fntpgm_uint8_t u8g_font_tpssbr[] U8G_FONT_SECTION("u8g_font_tpssbr");
-extern const u8g_fntpgm_uint8_t u8g_font_tpssbn[] U8G_FONT_SECTION("u8g_font_tpssbn");
+extern const u8g_fntpgm_uint8_t repetier_tpssb[] repetier_SECTION("repetier_tpssb");
+extern const u8g_fntpgm_uint8_t repetier_tpssbr[] repetier_SECTION("repetier_tpssbr");
+extern const u8g_fntpgm_uint8_t repetier_tpssbn[] repetier_SECTION("repetier_tpssbn");
 
-extern const u8g_fntpgm_uint8_t u8g_font_tpss[] U8G_FONT_SECTION("u8g_font_tpss");
-extern const u8g_fntpgm_uint8_t u8g_font_tpssr[] U8G_FONT_SECTION("u8g_font_tpssr");
-extern const u8g_fntpgm_uint8_t u8g_font_tpssn[] U8G_FONT_SECTION("u8g_font_tpssn");
+extern const u8g_fntpgm_uint8_t repetier_tpss[] repetier_SECTION("repetier_tpss");
+extern const u8g_fntpgm_uint8_t repetier_tpssr[] repetier_SECTION("repetier_tpssr");
+extern const u8g_fntpgm_uint8_t repetier_tpssn[] repetier_SECTION("repetier_tpssn");
 
 /* contributed */
 
-extern const u8g_fntpgm_uint8_t u8g_font_freedoomr25n[] U8G_FONT_SECTION("u8g_font_freedoomr25n");
-extern const u8g_fntpgm_uint8_t u8g_font_freedoomr10r[] U8G_FONT_SECTION("u8g_font_freedoomr10r");
+extern const u8g_fntpgm_uint8_t repetier_freedoomr25n[] repetier_SECTION("repetier_freedoomr25n");
+extern const u8g_fntpgm_uint8_t repetier_freedoomr10r[] repetier_SECTION("repetier_freedoomr10r");
 
 /* adobe X11 */
-extern const u8g_fntpgm_uint8_t u8g_font_courB08[] U8G_FONT_SECTION("u8g_font_courB08");
-extern const u8g_fntpgm_uint8_t u8g_font_courB08r[] U8G_FONT_SECTION("u8g_font_courB08r");
-extern const u8g_fntpgm_uint8_t u8g_font_courB10[] U8G_FONT_SECTION("u8g_font_courB10");
-extern const u8g_fntpgm_uint8_t u8g_font_courB10r[] U8G_FONT_SECTION("u8g_font_courB10r");
-extern const u8g_fntpgm_uint8_t u8g_font_courB12[] U8G_FONT_SECTION("u8g_font_courB12");
-extern const u8g_fntpgm_uint8_t u8g_font_courB12r[] U8G_FONT_SECTION("u8g_font_courB12r");
-extern const u8g_fntpgm_uint8_t u8g_font_courB14[] U8G_FONT_SECTION("u8g_font_courB14");
-extern const u8g_fntpgm_uint8_t u8g_font_courB14r[] U8G_FONT_SECTION("u8g_font_courB14r");
-extern const u8g_fntpgm_uint8_t u8g_font_courB18[] U8G_FONT_SECTION("u8g_font_courB18");
-extern const u8g_fntpgm_uint8_t u8g_font_courB18r[] U8G_FONT_SECTION("u8g_font_courB18r");
-extern const u8g_fntpgm_uint8_t u8g_font_courB24[] U8G_FONT_SECTION("u8g_font_courB24");
-extern const u8g_fntpgm_uint8_t u8g_font_courB24r[] U8G_FONT_SECTION("u8g_font_courB24r");
-extern const u8g_fntpgm_uint8_t u8g_font_courB24n[] U8G_FONT_SECTION("u8g_font_courB24n");
+extern const u8g_fntpgm_uint8_t repetier_courB08[] repetier_SECTION("repetier_courB08");
+extern const u8g_fntpgm_uint8_t repetier_courB08r[] repetier_SECTION("repetier_courB08r");
+extern const u8g_fntpgm_uint8_t repetier_courB10[] repetier_SECTION("repetier_courB10");
+extern const u8g_fntpgm_uint8_t repetier_courB10r[] repetier_SECTION("repetier_courB10r");
+extern const u8g_fntpgm_uint8_t repetier_courB12[] repetier_SECTION("repetier_courB12");
+extern const u8g_fntpgm_uint8_t repetier_courB12r[] repetier_SECTION("repetier_courB12r");
+extern const u8g_fntpgm_uint8_t repetier_courB14[] repetier_SECTION("repetier_courB14");
+extern const u8g_fntpgm_uint8_t repetier_courB14r[] repetier_SECTION("repetier_courB14r");
+extern const u8g_fntpgm_uint8_t repetier_courB18[] repetier_SECTION("repetier_courB18");
+extern const u8g_fntpgm_uint8_t repetier_courB18r[] repetier_SECTION("repetier_courB18r");
+extern const u8g_fntpgm_uint8_t repetier_courB24[] repetier_SECTION("repetier_courB24");
+extern const u8g_fntpgm_uint8_t repetier_courB24r[] repetier_SECTION("repetier_courB24r");
+extern const u8g_fntpgm_uint8_t repetier_courB24n[] repetier_SECTION("repetier_courB24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_courR08[] U8G_FONT_SECTION("u8g_font_courR08");
-extern const u8g_fntpgm_uint8_t u8g_font_courR08r[] U8G_FONT_SECTION("u8g_font_courR08r");
-extern const u8g_fntpgm_uint8_t u8g_font_courR10[] U8G_FONT_SECTION("u8g_font_courR10");
-extern const u8g_fntpgm_uint8_t u8g_font_courR10r[] U8G_FONT_SECTION("u8g_font_courR10r");
-extern const u8g_fntpgm_uint8_t u8g_font_courR12[] U8G_FONT_SECTION("u8g_font_courR12");
-extern const u8g_fntpgm_uint8_t u8g_font_courR12r[] U8G_FONT_SECTION("u8g_font_courR12r");
-extern const u8g_fntpgm_uint8_t u8g_font_courR14[] U8G_FONT_SECTION("u8g_font_courR14");
-extern const u8g_fntpgm_uint8_t u8g_font_courR14r[] U8G_FONT_SECTION("u8g_font_courR14r");
-extern const u8g_fntpgm_uint8_t u8g_font_courR18[] U8G_FONT_SECTION("u8g_font_courR18");
-extern const u8g_fntpgm_uint8_t u8g_font_courR18r[] U8G_FONT_SECTION("u8g_font_courR18r");
-extern const u8g_fntpgm_uint8_t u8g_font_courR24[] U8G_FONT_SECTION("u8g_font_courR24");
-extern const u8g_fntpgm_uint8_t u8g_font_courR24r[] U8G_FONT_SECTION("u8g_font_courR24r");
-extern const u8g_fntpgm_uint8_t u8g_font_courR24n[] U8G_FONT_SECTION("u8g_font_courR24n");
+extern const u8g_fntpgm_uint8_t repetier_courR08[] repetier_SECTION("repetier_courR08");
+extern const u8g_fntpgm_uint8_t repetier_courR08r[] repetier_SECTION("repetier_courR08r");
+extern const u8g_fntpgm_uint8_t repetier_courR10[] repetier_SECTION("repetier_courR10");
+extern const u8g_fntpgm_uint8_t repetier_courR10r[] repetier_SECTION("repetier_courR10r");
+extern const u8g_fntpgm_uint8_t repetier_courR12[] repetier_SECTION("repetier_courR12");
+extern const u8g_fntpgm_uint8_t repetier_courR12r[] repetier_SECTION("repetier_courR12r");
+extern const u8g_fntpgm_uint8_t repetier_courR14[] repetier_SECTION("repetier_courR14");
+extern const u8g_fntpgm_uint8_t repetier_courR14r[] repetier_SECTION("repetier_courR14r");
+extern const u8g_fntpgm_uint8_t repetier_courR18[] repetier_SECTION("repetier_courR18");
+extern const u8g_fntpgm_uint8_t repetier_courR18r[] repetier_SECTION("repetier_courR18r");
+extern const u8g_fntpgm_uint8_t repetier_courR24[] repetier_SECTION("repetier_courR24");
+extern const u8g_fntpgm_uint8_t repetier_courR24r[] repetier_SECTION("repetier_courR24r");
+extern const u8g_fntpgm_uint8_t repetier_courR24n[] repetier_SECTION("repetier_courR24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_helvB08[] U8G_FONT_SECTION("u8g_font_helvB08");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB08r[] U8G_FONT_SECTION("u8g_font_helvB08r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB10[] U8G_FONT_SECTION("u8g_font_helvB10");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB10r[] U8G_FONT_SECTION("u8g_font_helvB10r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB12[] U8G_FONT_SECTION("u8g_font_helvB12");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB12r[] U8G_FONT_SECTION("u8g_font_helvB12r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB14[] U8G_FONT_SECTION("u8g_font_helvB14");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB14r[] U8G_FONT_SECTION("u8g_font_helvB14r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB18[] U8G_FONT_SECTION("u8g_font_helvB18");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB18r[] U8G_FONT_SECTION("u8g_font_helvB18r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB24[] U8G_FONT_SECTION("u8g_font_helvB24");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB24r[] U8G_FONT_SECTION("u8g_font_helvB24r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvB24n[] U8G_FONT_SECTION("u8g_font_helvB24n");
+extern const u8g_fntpgm_uint8_t repetier_helvB08[] repetier_SECTION("repetier_helvB08");
+extern const u8g_fntpgm_uint8_t repetier_helvB08r[] repetier_SECTION("repetier_helvB08r");
+extern const u8g_fntpgm_uint8_t repetier_helvB10[] repetier_SECTION("repetier_helvB10");
+extern const u8g_fntpgm_uint8_t repetier_helvB10r[] repetier_SECTION("repetier_helvB10r");
+extern const u8g_fntpgm_uint8_t repetier_helvB12[] repetier_SECTION("repetier_helvB12");
+extern const u8g_fntpgm_uint8_t repetier_helvB12r[] repetier_SECTION("repetier_helvB12r");
+extern const u8g_fntpgm_uint8_t repetier_helvB14[] repetier_SECTION("repetier_helvB14");
+extern const u8g_fntpgm_uint8_t repetier_helvB14r[] repetier_SECTION("repetier_helvB14r");
+extern const u8g_fntpgm_uint8_t repetier_helvB18[] repetier_SECTION("repetier_helvB18");
+extern const u8g_fntpgm_uint8_t repetier_helvB18r[] repetier_SECTION("repetier_helvB18r");
+extern const u8g_fntpgm_uint8_t repetier_helvB24[] repetier_SECTION("repetier_helvB24");
+extern const u8g_fntpgm_uint8_t repetier_helvB24r[] repetier_SECTION("repetier_helvB24r");
+extern const u8g_fntpgm_uint8_t repetier_helvB24n[] repetier_SECTION("repetier_helvB24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_helvR08[] U8G_FONT_SECTION("u8g_font_helvR08");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR08r[] U8G_FONT_SECTION("u8g_font_helvR08r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR10[] U8G_FONT_SECTION("u8g_font_helvR10");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR10r[] U8G_FONT_SECTION("u8g_font_helvR10r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR12[] U8G_FONT_SECTION("u8g_font_helvR12");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR12r[] U8G_FONT_SECTION("u8g_font_helvR12r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR14[] U8G_FONT_SECTION("u8g_font_helvR14");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR14r[] U8G_FONT_SECTION("u8g_font_helvR14r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR18[] U8G_FONT_SECTION("u8g_font_helvR18");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR18r[] U8G_FONT_SECTION("u8g_font_helvR18r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR24[] U8G_FONT_SECTION("u8g_font_helvR24");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR24r[] U8G_FONT_SECTION("u8g_font_helvR24r");
-extern const u8g_fntpgm_uint8_t u8g_font_helvR24n[] U8G_FONT_SECTION("u8g_font_helvR24n");
+extern const u8g_fntpgm_uint8_t repetier_helvR08[] repetier_SECTION("repetier_helvR08");
+extern const u8g_fntpgm_uint8_t repetier_helvR08r[] repetier_SECTION("repetier_helvR08r");
+extern const u8g_fntpgm_uint8_t repetier_helvR10[] repetier_SECTION("repetier_helvR10");
+extern const u8g_fntpgm_uint8_t repetier_helvR10r[] repetier_SECTION("repetier_helvR10r");
+extern const u8g_fntpgm_uint8_t repetier_helvR12[] repetier_SECTION("repetier_helvR12");
+extern const u8g_fntpgm_uint8_t repetier_helvR12r[] repetier_SECTION("repetier_helvR12r");
+extern const u8g_fntpgm_uint8_t repetier_helvR14[] repetier_SECTION("repetier_helvR14");
+extern const u8g_fntpgm_uint8_t repetier_helvR14r[] repetier_SECTION("repetier_helvR14r");
+extern const u8g_fntpgm_uint8_t repetier_helvR18[] repetier_SECTION("repetier_helvR18");
+extern const u8g_fntpgm_uint8_t repetier_helvR18r[] repetier_SECTION("repetier_helvR18r");
+extern const u8g_fntpgm_uint8_t repetier_helvR24[] repetier_SECTION("repetier_helvR24");
+extern const u8g_fntpgm_uint8_t repetier_helvR24r[] repetier_SECTION("repetier_helvR24r");
+extern const u8g_fntpgm_uint8_t repetier_helvR24n[] repetier_SECTION("repetier_helvR24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB08[] U8G_FONT_SECTION("u8g_font_ncenB08");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB08r[] U8G_FONT_SECTION("u8g_font_ncenB08r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB10[] U8G_FONT_SECTION("u8g_font_ncenB10");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB10r[] U8G_FONT_SECTION("u8g_font_ncenB10r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB12[] U8G_FONT_SECTION("u8g_font_ncenB12");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB12r[] U8G_FONT_SECTION("u8g_font_ncenB12r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB14[] U8G_FONT_SECTION("u8g_font_ncenB14");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB14r[] U8G_FONT_SECTION("u8g_font_ncenB14r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB18[] U8G_FONT_SECTION("u8g_font_ncenB18");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB18r[] U8G_FONT_SECTION("u8g_font_ncenB18r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB24[] U8G_FONT_SECTION("u8g_font_ncenB24");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB24r[] U8G_FONT_SECTION("u8g_font_ncenB24r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenB24n[] U8G_FONT_SECTION("u8g_font_ncenB24n");
+extern const u8g_fntpgm_uint8_t repetier_ncenB08[] repetier_SECTION("repetier_ncenB08");
+extern const u8g_fntpgm_uint8_t repetier_ncenB08r[] repetier_SECTION("repetier_ncenB08r");
+extern const u8g_fntpgm_uint8_t repetier_ncenB10[] repetier_SECTION("repetier_ncenB10");
+extern const u8g_fntpgm_uint8_t repetier_ncenB10r[] repetier_SECTION("repetier_ncenB10r");
+extern const u8g_fntpgm_uint8_t repetier_ncenB12[] repetier_SECTION("repetier_ncenB12");
+extern const u8g_fntpgm_uint8_t repetier_ncenB12r[] repetier_SECTION("repetier_ncenB12r");
+extern const u8g_fntpgm_uint8_t repetier_ncenB14[] repetier_SECTION("repetier_ncenB14");
+extern const u8g_fntpgm_uint8_t repetier_ncenB14r[] repetier_SECTION("repetier_ncenB14r");
+extern const u8g_fntpgm_uint8_t repetier_ncenB18[] repetier_SECTION("repetier_ncenB18");
+extern const u8g_fntpgm_uint8_t repetier_ncenB18r[] repetier_SECTION("repetier_ncenB18r");
+extern const u8g_fntpgm_uint8_t repetier_ncenB24[] repetier_SECTION("repetier_ncenB24");
+extern const u8g_fntpgm_uint8_t repetier_ncenB24r[] repetier_SECTION("repetier_ncenB24r");
+extern const u8g_fntpgm_uint8_t repetier_ncenB24n[] repetier_SECTION("repetier_ncenB24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR08[] U8G_FONT_SECTION("u8g_font_ncenR08");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR08r[] U8G_FONT_SECTION("u8g_font_ncenR08r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR10[] U8G_FONT_SECTION("u8g_font_ncenR10");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR10r[] U8G_FONT_SECTION("u8g_font_ncenR10r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR12[] U8G_FONT_SECTION("u8g_font_ncenR12");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR12r[] U8G_FONT_SECTION("u8g_font_ncenR12r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR14[] U8G_FONT_SECTION("u8g_font_ncenR14");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR14r[] U8G_FONT_SECTION("u8g_font_ncenR14r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR18[] U8G_FONT_SECTION("u8g_font_ncenR18");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR18r[] U8G_FONT_SECTION("u8g_font_ncenR18r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR24[] U8G_FONT_SECTION("u8g_font_ncenR24");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR24r[] U8G_FONT_SECTION("u8g_font_ncenR24r");
-extern const u8g_fntpgm_uint8_t u8g_font_ncenR24n[] U8G_FONT_SECTION("u8g_font_ncenR24n");
+extern const u8g_fntpgm_uint8_t repetier_ncenR08[] repetier_SECTION("repetier_ncenR08");
+extern const u8g_fntpgm_uint8_t repetier_ncenR08r[] repetier_SECTION("repetier_ncenR08r");
+extern const u8g_fntpgm_uint8_t repetier_ncenR10[] repetier_SECTION("repetier_ncenR10");
+extern const u8g_fntpgm_uint8_t repetier_ncenR10r[] repetier_SECTION("repetier_ncenR10r");
+extern const u8g_fntpgm_uint8_t repetier_ncenR12[] repetier_SECTION("repetier_ncenR12");
+extern const u8g_fntpgm_uint8_t repetier_ncenR12r[] repetier_SECTION("repetier_ncenR12r");
+extern const u8g_fntpgm_uint8_t repetier_ncenR14[] repetier_SECTION("repetier_ncenR14");
+extern const u8g_fntpgm_uint8_t repetier_ncenR14r[] repetier_SECTION("repetier_ncenR14r");
+extern const u8g_fntpgm_uint8_t repetier_ncenR18[] repetier_SECTION("repetier_ncenR18");
+extern const u8g_fntpgm_uint8_t repetier_ncenR18r[] repetier_SECTION("repetier_ncenR18r");
+extern const u8g_fntpgm_uint8_t repetier_ncenR24[] repetier_SECTION("repetier_ncenR24");
+extern const u8g_fntpgm_uint8_t repetier_ncenR24r[] repetier_SECTION("repetier_ncenR24r");
+extern const u8g_fntpgm_uint8_t repetier_ncenR24n[] repetier_SECTION("repetier_ncenR24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_symb08[] U8G_FONT_SECTION("u8g_font_symb08");
-extern const u8g_fntpgm_uint8_t u8g_font_symb08r[] U8G_FONT_SECTION("u8g_font_symb08r");
-extern const u8g_fntpgm_uint8_t u8g_font_symb10[] U8G_FONT_SECTION("u8g_font_symb10");
-extern const u8g_fntpgm_uint8_t u8g_font_symb10r[] U8G_FONT_SECTION("u8g_font_symb10r");
-extern const u8g_fntpgm_uint8_t u8g_font_symb12[] U8G_FONT_SECTION("u8g_font_symb12");
-extern const u8g_fntpgm_uint8_t u8g_font_symb12r[] U8G_FONT_SECTION("u8g_font_symb12r");
-extern const u8g_fntpgm_uint8_t u8g_font_symb14[] U8G_FONT_SECTION("u8g_font_symb14");
-extern const u8g_fntpgm_uint8_t u8g_font_symb14r[] U8G_FONT_SECTION("u8g_font_symb14r");
-extern const u8g_fntpgm_uint8_t u8g_font_symb18[] U8G_FONT_SECTION("u8g_font_symb18");
-extern const u8g_fntpgm_uint8_t u8g_font_symb18r[] U8G_FONT_SECTION("u8g_font_symb18r");
-extern const u8g_fntpgm_uint8_t u8g_font_symb24[] U8G_FONT_SECTION("u8g_font_symb24");
-extern const u8g_fntpgm_uint8_t u8g_font_symb24r[] U8G_FONT_SECTION("u8g_font_symb24r");
+extern const u8g_fntpgm_uint8_t repetier_symb08[] repetier_SECTION("repetier_symb08");
+extern const u8g_fntpgm_uint8_t repetier_symb08r[] repetier_SECTION("repetier_symb08r");
+extern const u8g_fntpgm_uint8_t repetier_symb10[] repetier_SECTION("repetier_symb10");
+extern const u8g_fntpgm_uint8_t repetier_symb10r[] repetier_SECTION("repetier_symb10r");
+extern const u8g_fntpgm_uint8_t repetier_symb12[] repetier_SECTION("repetier_symb12");
+extern const u8g_fntpgm_uint8_t repetier_symb12r[] repetier_SECTION("repetier_symb12r");
+extern const u8g_fntpgm_uint8_t repetier_symb14[] repetier_SECTION("repetier_symb14");
+extern const u8g_fntpgm_uint8_t repetier_symb14r[] repetier_SECTION("repetier_symb14r");
+extern const u8g_fntpgm_uint8_t repetier_symb18[] repetier_SECTION("repetier_symb18");
+extern const u8g_fntpgm_uint8_t repetier_symb18r[] repetier_SECTION("repetier_symb18r");
+extern const u8g_fntpgm_uint8_t repetier_symb24[] repetier_SECTION("repetier_symb24");
+extern const u8g_fntpgm_uint8_t repetier_symb24r[] repetier_SECTION("repetier_symb24r");
 
-extern const u8g_fntpgm_uint8_t u8g_font_timB08[] U8G_FONT_SECTION("u8g_font_timB08");
-extern const u8g_fntpgm_uint8_t u8g_font_timB08r[] U8G_FONT_SECTION("u8g_font_timB08r");
-extern const u8g_fntpgm_uint8_t u8g_font_timB10[] U8G_FONT_SECTION("u8g_font_timB10");
-extern const u8g_fntpgm_uint8_t u8g_font_timB10r[] U8G_FONT_SECTION("u8g_font_timB10r");
-extern const u8g_fntpgm_uint8_t u8g_font_timB12[] U8G_FONT_SECTION("u8g_font_timB12");
-extern const u8g_fntpgm_uint8_t u8g_font_timB12r[] U8G_FONT_SECTION("u8g_font_timB12r");
-extern const u8g_fntpgm_uint8_t u8g_font_timB14[] U8G_FONT_SECTION("u8g_font_timB14");
-extern const u8g_fntpgm_uint8_t u8g_font_timB14r[] U8G_FONT_SECTION("u8g_font_timB14r");
-extern const u8g_fntpgm_uint8_t u8g_font_timB18[] U8G_FONT_SECTION("u8g_font_timB18");
-extern const u8g_fntpgm_uint8_t u8g_font_timB18r[] U8G_FONT_SECTION("u8g_font_timB18r");
-extern const u8g_fntpgm_uint8_t u8g_font_timB24[] U8G_FONT_SECTION("u8g_font_timB24");
-extern const u8g_fntpgm_uint8_t u8g_font_timB24r[] U8G_FONT_SECTION("u8g_font_timB24r");
-extern const u8g_fntpgm_uint8_t u8g_font_timB24n[] U8G_FONT_SECTION("u8g_font_timB24n");
+extern const u8g_fntpgm_uint8_t repetier_timB08[] repetier_SECTION("repetier_timB08");
+extern const u8g_fntpgm_uint8_t repetier_timB08r[] repetier_SECTION("repetier_timB08r");
+extern const u8g_fntpgm_uint8_t repetier_timB10[] repetier_SECTION("repetier_timB10");
+extern const u8g_fntpgm_uint8_t repetier_timB10r[] repetier_SECTION("repetier_timB10r");
+extern const u8g_fntpgm_uint8_t repetier_timB12[] repetier_SECTION("repetier_timB12");
+extern const u8g_fntpgm_uint8_t repetier_timB12r[] repetier_SECTION("repetier_timB12r");
+extern const u8g_fntpgm_uint8_t repetier_timB14[] repetier_SECTION("repetier_timB14");
+extern const u8g_fntpgm_uint8_t repetier_timB14r[] repetier_SECTION("repetier_timB14r");
+extern const u8g_fntpgm_uint8_t repetier_timB18[] repetier_SECTION("repetier_timB18");
+extern const u8g_fntpgm_uint8_t repetier_timB18r[] repetier_SECTION("repetier_timB18r");
+extern const u8g_fntpgm_uint8_t repetier_timB24[] repetier_SECTION("repetier_timB24");
+extern const u8g_fntpgm_uint8_t repetier_timB24r[] repetier_SECTION("repetier_timB24r");
+extern const u8g_fntpgm_uint8_t repetier_timB24n[] repetier_SECTION("repetier_timB24n");
 
-extern const u8g_fntpgm_uint8_t u8g_font_timR08[] U8G_FONT_SECTION("u8g_font_timR08");
-extern const u8g_fntpgm_uint8_t u8g_font_timR08r[] U8G_FONT_SECTION("u8g_font_timR08r");
-extern const u8g_fntpgm_uint8_t u8g_font_timR10[] U8G_FONT_SECTION("u8g_font_timR10");
-extern const u8g_fntpgm_uint8_t u8g_font_timR10r[] U8G_FONT_SECTION("u8g_font_timR10r");
-extern const u8g_fntpgm_uint8_t u8g_font_timR12[] U8G_FONT_SECTION("u8g_font_timR12");
-extern const u8g_fntpgm_uint8_t u8g_font_timR12r[] U8G_FONT_SECTION("u8g_font_timR12r");
-extern const u8g_fntpgm_uint8_t u8g_font_timR14[] U8G_FONT_SECTION("u8g_font_timR14");
-extern const u8g_fntpgm_uint8_t u8g_font_timR14r[] U8G_FONT_SECTION("u8g_font_timR14r");
-extern const u8g_fntpgm_uint8_t u8g_font_timR18[] U8G_FONT_SECTION("u8g_font_timR18");
-extern const u8g_fntpgm_uint8_t u8g_font_timR18r[] U8G_FONT_SECTION("u8g_font_timR18r");
-extern const u8g_fntpgm_uint8_t u8g_font_timR24[] U8G_FONT_SECTION("u8g_font_timR24");
-extern const u8g_fntpgm_uint8_t u8g_font_timR24r[] U8G_FONT_SECTION("u8g_font_timR24r");
-extern const u8g_fntpgm_uint8_t u8g_font_timR24n[] U8G_FONT_SECTION("u8g_font_timR24n");
+extern const u8g_fntpgm_uint8_t repetier_timR08[] repetier_SECTION("repetier_timR08");
+extern const u8g_fntpgm_uint8_t repetier_timR08r[] repetier_SECTION("repetier_timR08r");
+extern const u8g_fntpgm_uint8_t repetier_timR10[] repetier_SECTION("repetier_timR10");
+extern const u8g_fntpgm_uint8_t repetier_timR10r[] repetier_SECTION("repetier_timR10r");
+extern const u8g_fntpgm_uint8_t repetier_timR12[] repetier_SECTION("repetier_timR12");
+extern const u8g_fntpgm_uint8_t repetier_timR12r[] repetier_SECTION("repetier_timR12r");
+extern const u8g_fntpgm_uint8_t repetier_timR14[] repetier_SECTION("repetier_timR14");
+extern const u8g_fntpgm_uint8_t repetier_timR14r[] repetier_SECTION("repetier_timR14r");
+extern const u8g_fntpgm_uint8_t repetier_timR18[] repetier_SECTION("repetier_timR18");
+extern const u8g_fntpgm_uint8_t repetier_timR18r[] repetier_SECTION("repetier_timR18r");
+extern const u8g_fntpgm_uint8_t repetier_timR24[] repetier_SECTION("repetier_timR24");
+extern const u8g_fntpgm_uint8_t repetier_timR24r[] repetier_SECTION("repetier_timR24r");
+extern const u8g_fntpgm_uint8_t repetier_timR24n[] repetier_SECTION("repetier_timR24n");
 
 /* fontstruct */
 
-extern const u8g_fntpgm_uint8_t u8g_font_p01type[] U8G_FONT_SECTION("u8g_font_p01type");
-extern const u8g_fntpgm_uint8_t u8g_font_p01typer[] U8G_FONT_SECTION("u8g_font_p01typer");
-extern const u8g_fntpgm_uint8_t u8g_font_p01typen[] U8G_FONT_SECTION("u8g_font_p01typen");
+extern const u8g_fntpgm_uint8_t repetier_p01type[] repetier_SECTION("repetier_p01type");
+extern const u8g_fntpgm_uint8_t repetier_p01typer[] repetier_SECTION("repetier_p01typer");
+extern const u8g_fntpgm_uint8_t repetier_p01typen[] repetier_SECTION("repetier_p01typen");
 
-extern const u8g_fntpgm_uint8_t u8g_font_lucasfont_alternate[] U8G_FONT_SECTION("u8g_font_lucasfont_alternate");
-extern const u8g_fntpgm_uint8_t u8g_font_lucasfont_alternater[] U8G_FONT_SECTION("u8g_font_lucasfont_alternater");
-extern const u8g_fntpgm_uint8_t u8g_font_lucasfont_alternaten[] U8G_FONT_SECTION("u8g_font_lucasfont_alternaten");
+extern const u8g_fntpgm_uint8_t repetier_lucasfont_alternate[] repetier_SECTION("repetier_lucasfont_alternate");
+extern const u8g_fntpgm_uint8_t repetier_lucasfont_alternater[] repetier_SECTION("repetier_lucasfont_alternater");
+extern const u8g_fntpgm_uint8_t repetier_lucasfont_alternaten[] repetier_SECTION("repetier_lucasfont_alternaten");
 
-extern const u8g_fntpgm_uint8_t u8g_font_chikita[] U8G_FONT_SECTION("u8g_font_chikita");
-extern const u8g_fntpgm_uint8_t u8g_font_chikitar[] U8G_FONT_SECTION("u8g_font_chikitar");
-extern const u8g_fntpgm_uint8_t u8g_font_chikitan[] U8G_FONT_SECTION("u8g_font_chikitan");
+extern const u8g_fntpgm_uint8_t repetier_chikita[] repetier_SECTION("repetier_chikita");
+extern const u8g_fntpgm_uint8_t repetier_chikitar[] repetier_SECTION("repetier_chikitar");
+extern const u8g_fntpgm_uint8_t repetier_chikitan[] repetier_SECTION("repetier_chikitan");
 
-extern const u8g_fntpgm_uint8_t u8g_font_pixelle_micro[] U8G_FONT_SECTION("u8g_font_pixelle_micro");
-extern const u8g_fntpgm_uint8_t u8g_font_pixelle_micror[] U8G_FONT_SECTION("u8g_font_pixelle_micror");
-extern const u8g_fntpgm_uint8_t u8g_font_pixelle_micron[] U8G_FONT_SECTION("u8g_font_pixelle_micron");
+extern const u8g_fntpgm_uint8_t repetier_pixelle_micro[] repetier_SECTION("repetier_pixelle_micro");
+extern const u8g_fntpgm_uint8_t repetier_pixelle_micror[] repetier_SECTION("repetier_pixelle_micror");
+extern const u8g_fntpgm_uint8_t repetier_pixelle_micron[] repetier_SECTION("repetier_pixelle_micron");
 
-extern const u8g_fntpgm_uint8_t u8g_font_trixel_square[] U8G_FONT_SECTION("u8g_font_trixel_square");
-extern const u8g_fntpgm_uint8_t u8g_font_trixel_squarer[] U8G_FONT_SECTION("u8g_font_trixel_squarer");
-extern const u8g_fntpgm_uint8_t u8g_font_trixel_squaren[] U8G_FONT_SECTION("u8g_font_trixel_squaren");
+extern const u8g_fntpgm_uint8_t repetier_trixel_square[] repetier_SECTION("repetier_trixel_square");
+extern const u8g_fntpgm_uint8_t repetier_trixel_squarer[] repetier_SECTION("repetier_trixel_squarer");
+extern const u8g_fntpgm_uint8_t repetier_trixel_squaren[] repetier_SECTION("repetier_trixel_squaren");
 
-extern const u8g_fntpgm_uint8_t u8g_font_robot_de_niro[] U8G_FONT_SECTION("u8g_font_robot_de_niro");
-extern const u8g_fntpgm_uint8_t u8g_font_robot_de_niror[] U8G_FONT_SECTION("u8g_font_robot_de_niror");
-extern const u8g_fntpgm_uint8_t u8g_font_robot_de_niron[] U8G_FONT_SECTION("u8g_font_robot_de_niron");
+extern const u8g_fntpgm_uint8_t repetier_robot_de_niro[] repetier_SECTION("repetier_robot_de_niro");
+extern const u8g_fntpgm_uint8_t repetier_robot_de_niror[] repetier_SECTION("repetier_robot_de_niror");
+extern const u8g_fntpgm_uint8_t repetier_robot_de_niron[] repetier_SECTION("repetier_robot_de_niron");
 
-extern const u8g_fntpgm_uint8_t u8g_font_baby[] U8G_FONT_SECTION("u8g_font_baby");
-extern const u8g_fntpgm_uint8_t u8g_font_babyr[] U8G_FONT_SECTION("u8g_font_babyr");
-extern const u8g_fntpgm_uint8_t u8g_font_babyn[] U8G_FONT_SECTION("u8g_font_babyn");
+extern const u8g_fntpgm_uint8_t repetier_baby[] repetier_SECTION("repetier_baby");
+extern const u8g_fntpgm_uint8_t repetier_babyr[] repetier_SECTION("repetier_babyr");
+extern const u8g_fntpgm_uint8_t repetier_babyn[] repetier_SECTION("repetier_babyn");
 
-extern const u8g_fntpgm_uint8_t u8g_font_blipfest_07[] U8G_FONT_SECTION("u8g_font_blipfest_07");
-extern const u8g_fntpgm_uint8_t u8g_font_blipfest_07r[] U8G_FONT_SECTION("u8g_font_blipfest_07r");
-extern const u8g_fntpgm_uint8_t u8g_font_blipfest_07n[] U8G_FONT_SECTION("u8g_font_blipfest_07n");
+extern const u8g_fntpgm_uint8_t repetier_blipfest_07[] repetier_SECTION("repetier_blipfest_07");
+extern const u8g_fntpgm_uint8_t repetier_blipfest_07r[] repetier_SECTION("repetier_blipfest_07r");
+extern const u8g_fntpgm_uint8_t repetier_blipfest_07n[] repetier_SECTION("repetier_blipfest_07n");
 
 
 
@@ -1942,7 +1942,7 @@ extern const u8g_fntpgm_uint8_t u8g_font_blipfest_07n[] U8G_FONT_SECTION("u8g_fo
   X Font      ascent = 6 descent=-1
   Max Font    ascent = 8 descent=-1
 */
-const u8g_fntpgm_uint8_t repetier_5x7[2405] U8G_FONT_SECTION("repetier_5x7") = {
+const u8g_fntpgm_uint8_t repetier_5x7[2405] repetier_SECTION("repetier_5x7") = {
   0,5,7,0,255,6,2,72,3,186,0,255,255,8,255,6,
   255,5,5,5,5,0,0,168,0,136,0,168,5,8,8,6,
   0,0,8,8,8,40,72,248,64,32,3,3,3,6,1,4,
@@ -2106,7 +2106,7 @@ const u8g_fntpgm_uint8_t repetier_5x7[2405] U8G_FONT_SECTION("repetier_5x7") = {
   X Font      ascent = 7 descent=-2
   Max Font    ascent = 8 descent=-2
 */
-const u8g_fntpgm_uint8_t repetier_6x10[2625] U8G_FONT_SECTION("repetier_6x10") = {
+const u8g_fntpgm_uint8_t repetier_6x10[2625] repetier_SECTION("repetier_6x10") = {
   0,7,10,0,254,7,2,105,3,251,0,255,254,8,254,7,
   254,5,7,7,6,0,0,168,0,136,0,136,0,168,5,8,
   8,6,0,0,8,8,8,40,72,248,64,32,3,3,3,6,
@@ -2283,7 +2283,7 @@ const u8g_fntpgm_uint8_t repetier_6x10[2625] U8G_FONT_SECTION("repetier_6x10") =
   X Font      ascent = 8 descent= 0
   Max Font    ascent =10 descent=-2
 */
-const u8g_fntpgm_uint8_t u8g_font_6x12_67_75[2382] U8G_FONT_SECTION("u8g_font_6x12_67_75") = {
+const u8g_fntpgm_uint8_t repetier_6x12_67_75[2382] repetier_SECTION("repetier_6x12_67_75") = {
   1,6,12,0,254,3,2,41,3,99,0,255,0,10,254,8,
   0,2,87,103,168,0,136,0,136,0,168,2,87,103,240,136,
   232,168,232,136,240,2,87,103,112,168,248,168,248,168,112,2,
@@ -3068,7 +3068,7 @@ u8g_dev_t u8g_dev_sh1106_128x64_2x_i2c = { u8g_dev_sh1106_128x64_2x_fn, &u8g_dev
 typedef void * u8g_glyph_t;
 
 /* size of the font data structure, there is no struct or class... */
-#define U8G_FONT_DATA_STRUCT_SIZE 17
+#define repetier_DATA_STRUCT_SIZE 17
 
 /*
   ... instead the fields of the font data structure are accessed directly by offset
@@ -3093,15 +3093,15 @@ typedef void * u8g_glyph_t;
 */
 
 /* use case: What is the width and the height of the minimal box into which string s fints? */
-void u8g_font_GetStrSize(const void *font, const char *s, u8g_uint_t *width, u8g_uint_t *height);
-void u8g_font_GetStrSizeP(const void *font, const char *s, u8g_uint_t *width, u8g_uint_t *height);
+void repetier_GetStrSize(const void *font, const char *s, u8g_uint_t *width, u8g_uint_t *height);
+void repetier_GetStrSizeP(const void *font, const char *s, u8g_uint_t *width, u8g_uint_t *height);
 
 /* use case: lower left edge of a minimal box is known, what is the correct x, y position for the string draw procedure */
-void u8g_font_AdjustXYToDraw(const void *font, const char *s, u8g_uint_t *x, u8g_uint_t *y);
-void u8g_font_AdjustXYToDrawP(const void *font, const char *s, u8g_uint_t *x, u8g_uint_t *y);
+void repetier_AdjustXYToDraw(const void *font, const char *s, u8g_uint_t *x, u8g_uint_t *y);
+void repetier_AdjustXYToDrawP(const void *font, const char *s, u8g_uint_t *x, u8g_uint_t *y);
 
 /* use case: Baseline origin known, return minimal box */
-void u8g_font_GetStrMinBox(u8g_t *u8g, const void *font, const char *s, u8g_uint_t *x, u8g_uint_t *y, u8g_uint_t *width, u8g_uint_t *height);
+void repetier_GetStrMinBox(u8g_t *u8g, const void *font, const char *s, u8g_uint_t *x, u8g_uint_t *y, u8g_uint_t *width, u8g_uint_t *height);
 
 /* procedures */
 
@@ -3109,15 +3109,15 @@ void u8g_font_GetStrMinBox(u8g_t *u8g, const void *font, const char *s, u8g_uint
 /* low level byte and word access */
 
 /* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
+//static uint8_t repetier_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
+static uint8_t repetier_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
 {
   font += offset;
   return u8g_pgm_read( (u8g_pgm_uint8_t *)font );
 }
 
-static uint16_t u8g_font_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint16_t u8g_font_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset)
+static uint16_t repetier_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
+static uint16_t repetier_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset)
 {
     uint16_t pos;
     font += offset;
@@ -3131,16 +3131,16 @@ static uint16_t u8g_font_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset
 /*========================================================================*/
 /* direct access on the font */
 
-static uint8_t u8g_font_GetFormat(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
-static uint8_t u8g_font_GetFormat(const u8g_fntpgm_uint8_t *font)
+static uint8_t repetier_GetFormat(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
+static uint8_t repetier_GetFormat(const u8g_fntpgm_uint8_t *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 0);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 0);
 }
 
-static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
-static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font)
+static uint8_t repetier_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
+static uint8_t repetier_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font)
 {
-  switch(u8g_font_GetFormat((const u8g_fntpgm_uint8_t*)font))
+  switch(repetier_GetFormat((const u8g_fntpgm_uint8_t*)font))
   {
     case 0: return 6;
     case 1: return 3;
@@ -3149,102 +3149,102 @@ static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font
   return 3;
 }
 
-static uint8_t u8g_font_GetBBXWidth(const void *font)
+static uint8_t repetier_GetBBXWidth(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 1);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 1);
 }
 
-static uint8_t u8g_font_GetBBXHeight(const void *font)
+static uint8_t repetier_GetBBXHeight(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 2);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 2);
 }
 
-static int8_t u8g_font_GetBBXOffX(const void *font)
+static int8_t repetier_GetBBXOffX(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 3);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 3);
 }
 
-static int8_t u8g_font_GetBBXOffY(const void *font)
+static int8_t repetier_GetBBXOffY(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 4);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 4);
 }
 
-uint8_t u8g_font_GetCapitalAHeight(const void *font)
+uint8_t repetier_GetCapitalAHeight(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 5);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 5);
 }
 
-uint16_t u8g_font_GetEncoding65Pos(const void *font) U8G_NOINLINE;
-uint16_t u8g_font_GetEncoding65Pos(const void *font)
+uint16_t repetier_GetEncoding65Pos(const void *font) U8G_NOINLINE;
+uint16_t repetier_GetEncoding65Pos(const void *font)
 {
-    return u8g_font_get_word((const u8g_fntpgm_uint8_t*)font, 6);
+    return repetier_get_word((const u8g_fntpgm_uint8_t*)font, 6);
 }
 
-uint16_t u8g_font_GetEncoding97Pos(const void *font) U8G_NOINLINE;
-uint16_t u8g_font_GetEncoding97Pos(const void *font)
+uint16_t repetier_GetEncoding97Pos(const void *font) U8G_NOINLINE;
+uint16_t repetier_GetEncoding97Pos(const void *font)
 {
-    return u8g_font_get_word((const u8g_fntpgm_uint8_t*)font, 8);
+    return repetier_get_word((const u8g_fntpgm_uint8_t*)font, 8);
 }
 
-uint8_t u8g_font_GetFontStartEncoding(const void *font)
+uint8_t repetier_GetFontStartEncoding(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 10);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 10);
 }
 
-uint8_t u8g_font_GetFontEndEncoding(const void *font)
+uint8_t repetier_GetFontEndEncoding(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 11);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 11);
 }
 
-int8_t u8g_font_GetLowerGDescent(const void *font)
+int8_t repetier_GetLowerGDescent(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 12);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 12);
 }
 
-int8_t u8g_font_GetFontAscent(const void *font)
+int8_t repetier_GetFontAscent(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 13);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 13);
 }
 
-int8_t u8g_font_GetFontDescent(const void *font)
+int8_t repetier_GetFontDescent(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 14);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 14);
 }
 
-int8_t u8g_font_GetFontXAscent(const void *font)
+int8_t repetier_GetFontXAscent(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 15);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 15);
 }
 
-int8_t u8g_font_GetFontXDescent(const void *font)
+int8_t repetier_GetFontXDescent(const void *font)
 {
-  return u8g_font_get_byte((const u8g_fntpgm_uint8_t*)font, 16);
+  return repetier_get_byte((const u8g_fntpgm_uint8_t*)font, 16);
 }
 
 
 /* return the data start for a font and the glyph pointer */
-static uint8_t *u8g_font_GetGlyphDataStart(const void *font, u8g_glyph_t g)
+static uint8_t *repetier_GetGlyphDataStart(const void *font, u8g_glyph_t g)
 {
-  return ((u8g_fntpgm_uint8_t *)g) + u8g_font_GetFontGlyphStructureSize((const u8g_fntpgm_uint8_t*)font);
+  return ((u8g_fntpgm_uint8_t *)g) + repetier_GetFontGlyphStructureSize((const u8g_fntpgm_uint8_t*)font);
 }
 
 /* calculate the overall length of the font, only used to create the picture for the google wiki */
-size_t u8g_font_GetSize(const void *font)
+size_t repetier_GetSize(const void *font)
 {
   uint8_t *p = (uint8_t *)(font);
-  uint8_t font_format = u8g_font_GetFormat((const u8g_fntpgm_uint8_t*)font);
-  uint8_t data_structure_size = u8g_font_GetFontGlyphStructureSize((const u8g_fntpgm_uint8_t*)font);
+  uint8_t font_format = repetier_GetFormat((const u8g_fntpgm_uint8_t*)font);
+  uint8_t data_structure_size = repetier_GetFontGlyphStructureSize((const u8g_fntpgm_uint8_t*)font);
   uint8_t start, end;
   uint8_t i;
   uint8_t mask = 255;
 
-  start = u8g_font_GetFontStartEncoding(font);
-  end = u8g_font_GetFontEndEncoding(font);
+  start = repetier_GetFontStartEncoding(font);
+  end = repetier_GetFontEndEncoding(font);
 
   if ( font_format == 1 )
     mask = 15;
 
-  p += U8G_FONT_DATA_STRUCT_SIZE;       /* skip font general information */
+  p += repetier_DATA_STRUCT_SIZE;       /* skip font general information */
 
   i = start;
   for(;;)
@@ -3271,30 +3271,30 @@ size_t u8g_font_GetSize(const void *font)
 
 uint8_t u8g_GetFontBBXWidth(u8g_t *u8g)
 {
-  return u8g_font_GetBBXWidth(u8g->font);
+  return repetier_GetBBXWidth(u8g->font);
 }
 
 uint8_t u8g_GetFontBBXHeight(u8g_t *u8g)
 {
-  return u8g_font_GetBBXHeight(u8g->font);
+  return repetier_GetBBXHeight(u8g->font);
 }
 
 int8_t u8g_GetFontBBXOffX(u8g_t *u8g) U8G_NOINLINE;
 int8_t u8g_GetFontBBXOffX(u8g_t *u8g)
 {
-  return u8g_font_GetBBXOffX(u8g->font);
+  return repetier_GetBBXOffX(u8g->font);
 }
 
 int8_t u8g_GetFontBBXOffY(u8g_t *u8g) U8G_NOINLINE;
 int8_t u8g_GetFontBBXOffY(u8g_t *u8g)
 {
-  return u8g_font_GetBBXOffY(u8g->font);
+  return repetier_GetBBXOffY(u8g->font);
 }
 
 uint8_t u8g_GetFontCapitalAHeight(u8g_t *u8g) U8G_NOINLINE;
 uint8_t u8g_GetFontCapitalAHeight(u8g_t *u8g)
 {
-  return u8g_font_GetCapitalAHeight(u8g->font);
+  return repetier_GetCapitalAHeight(u8g->font);
 }
 
 /*========================================================================*/
@@ -3303,7 +3303,7 @@ uint8_t u8g_GetFontCapitalAHeight(u8g_t *u8g)
 static void u8g_CopyGlyphDataToCache(u8g_t *u8g, u8g_glyph_t g)
 {
   uint8_t tmp;
-  switch( u8g_font_GetFormat(u8g->font) )
+  switch( repetier_GetFormat(u8g->font) )
   {
     case 0:
     case 2:
@@ -3375,8 +3375,8 @@ static void u8g_FillEmptyGlyphCache(u8g_t *u8g)
 u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
 {
   uint8_t *p = (uint8_t *)(u8g->font);
-  uint8_t font_format = u8g_font_GetFormat(u8g->font);
-  uint8_t data_structure_size = u8g_font_GetFontGlyphStructureSize(u8g->font);
+  uint8_t font_format = repetier_GetFormat(u8g->font);
+  uint8_t data_structure_size = repetier_GetFontGlyphStructureSize(u8g->font);
   uint8_t start, end;
   uint16_t pos;
   uint8_t i;
@@ -3385,10 +3385,10 @@ u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
   if ( font_format == 1 )
     mask = 15;
 
-  start = u8g_font_GetFontStartEncoding(u8g->font);
-  end = u8g_font_GetFontEndEncoding(u8g->font);
+  start = repetier_GetFontStartEncoding(u8g->font);
+  end = repetier_GetFontEndEncoding(u8g->font);
 
-  pos = u8g_font_GetEncoding97Pos(u8g->font);
+  pos = repetier_GetEncoding97Pos(u8g->font);
   if ( requested_encoding >= 97 && pos > 0 )
   {
     p+= pos;
@@ -3396,14 +3396,14 @@ u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
   }
   else
   {
-    pos = u8g_font_GetEncoding65Pos(u8g->font);
+    pos = repetier_GetEncoding65Pos(u8g->font);
     if ( requested_encoding >= 65 && pos > 0 )
     {
       p+= pos;
       start = 65;
     }
     else
-      p += U8G_FONT_DATA_STRUCT_SIZE;       /* skip font general information */
+      p += repetier_DATA_STRUCT_SIZE;       /* skip font general information */
   }
 
   if ( requested_encoding > end )
@@ -3483,7 +3483,7 @@ int8_t u8g_DrawGlyphDir(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t dir, uin
   bytes_per_line += 7;
   bytes_per_line /= 8;
 
-  data = u8g_font_GetGlyphDataStart(u8g->font, g);
+  data = repetier_GetGlyphDataStart(u8g->font, g);
 
   switch(dir)
   {
@@ -3597,7 +3597,7 @@ int8_t u8g_draw_glyph(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encoding)
     u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
     if ( g == NULL  )
       return 0;
-    data = u8g_font_GetGlyphDataStart(u8g->font, g);
+    data = repetier_GetGlyphDataStart(u8g->font, g);
   }
 
   w = u8g->glyph_width;
@@ -3649,7 +3649,7 @@ int8_t u8g_draw_glyph90(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encoding
     u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
     if ( g == NULL  )
       return 0;
-    data = u8g_font_GetGlyphDataStart(u8g->font, g);
+    data = repetier_GetGlyphDataStart(u8g->font, g);
   }
 
   w = u8g->glyph_width;
@@ -3701,7 +3701,7 @@ int8_t u8g_draw_glyph180(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encodin
     u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
     if ( g == NULL  )
       return 0;
-    data = u8g_font_GetGlyphDataStart(u8g->font, g);
+    data = repetier_GetGlyphDataStart(u8g->font, g);
   }
 
   w = u8g->glyph_width;
@@ -3753,7 +3753,7 @@ int8_t u8g_draw_glyph270(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encodin
     u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
     if ( g == NULL  )
       return 0;
-    data = u8g_font_GetGlyphDataStart(u8g->font, g);
+    data = repetier_GetGlyphDataStart(u8g->font, g);
   }
 
   w = u8g->glyph_width;
@@ -3821,7 +3821,7 @@ u8g_uint_t u8g_DrawStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
   int8_t d;
 
   //u8g_uint_t u8g_GetStrWidth(u8g, s);
-  //u8g_font_GetFontAscent(u8g->font)-u8g_font_GetFontDescent(u8g->font);
+  //repetier_GetFontAscent(u8g->font)-repetier_GetFontDescent(u8g->font);
 
   y += u8g->font_calc_vref(u8g);
 
@@ -3999,20 +3999,20 @@ void u8g_UpdateRefHeight(u8g_t *u8g)
   uint16_t ls;
   if ( u8g->font == NULL )
     return;
-  if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_TEXT )
+  if ( u8g->font_height_mode == repetier_HEIGHT_MODE_TEXT )
   {
-    u8g->font_ref_ascent = u8g_font_GetCapitalAHeight(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetLowerGDescent(u8g->font);
+    u8g->font_ref_ascent = repetier_GetCapitalAHeight(u8g->font);
+    u8g->font_ref_descent = repetier_GetLowerGDescent(u8g->font);
   }
-  else if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_XTEXT )
+  else if ( u8g->font_height_mode == repetier_HEIGHT_MODE_XTEXT )
   {
-    u8g->font_ref_ascent = u8g_font_GetFontXAscent(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetFontXDescent(u8g->font);
+    u8g->font_ref_ascent = repetier_GetFontXAscent(u8g->font);
+    u8g->font_ref_descent = repetier_GetFontXDescent(u8g->font);
   }
   else
   {
-    u8g->font_ref_ascent = u8g_font_GetFontAscent(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetFontDescent(u8g->font);
+    u8g->font_ref_ascent = repetier_GetFontAscent(u8g->font);
+    u8g->font_ref_descent = repetier_GetFontDescent(u8g->font);
   }
 
   ls = u8g->font_ref_ascent - u8g->font_ref_descent;
@@ -4027,20 +4027,20 @@ void u8g_UpdateRefHeight(u8g_t *u8g)
 
 void u8g_SetFontRefHeightText(u8g_t *u8g)
 {
-  u8g->font_height_mode = U8G_FONT_HEIGHT_MODE_TEXT;
+  u8g->font_height_mode = repetier_HEIGHT_MODE_TEXT;
   u8g_UpdateRefHeight(u8g);
 }
 
 void u8g_SetFontRefHeightExtendedText(u8g_t *u8g)
 {
-  u8g->font_height_mode = U8G_FONT_HEIGHT_MODE_XTEXT;
+  u8g->font_height_mode = repetier_HEIGHT_MODE_XTEXT;
   u8g_UpdateRefHeight(u8g);
 }
 
 
 void u8g_SetFontRefHeightAll(u8g_t *u8g)
 {
-  u8g->font_height_mode = U8G_FONT_HEIGHT_MODE_ALL;
+  u8g->font_height_mode = repetier_HEIGHT_MODE_ALL;
   u8g_UpdateRefHeight(u8g);
 }
 
@@ -4056,18 +4056,18 @@ void u8g_SetFontLineSpacingFactor(u8g_t *u8g, uint8_t  factor)
 /*========================================================================*/
 /* callback procedures to correct the y position */
 
-u8g_uint_t u8g_font_calc_vref_font(u8g_t *u8g)
+u8g_uint_t repetier_calc_vref_font(u8g_t *u8g)
 {
   return 0;
 }
 
 void u8g_SetFontPosBaseline(u8g_t *u8g)
 {
-  u8g->font_calc_vref = u8g_font_calc_vref_font;
+  u8g->font_calc_vref = repetier_calc_vref_font;
 }
 
 
-u8g_uint_t u8g_font_calc_vref_bottom(u8g_t *u8g)
+u8g_uint_t repetier_calc_vref_bottom(u8g_t *u8g)
 {
   /* y += (u8g_uint_t)(u8g_int_t)(u8g->font_ref_descent); */
   return (u8g_uint_t)(u8g_int_t)(u8g->font_ref_descent);
@@ -4075,10 +4075,10 @@ u8g_uint_t u8g_font_calc_vref_bottom(u8g_t *u8g)
 
 void u8g_SetFontPosBottom(u8g_t *u8g)
 {
-  u8g->font_calc_vref = u8g_font_calc_vref_bottom;
+  u8g->font_calc_vref = repetier_calc_vref_bottom;
 }
 
-u8g_uint_t u8g_font_calc_vref_top(u8g_t *u8g)
+u8g_uint_t repetier_calc_vref_top(u8g_t *u8g)
 {
   u8g_uint_t tmp;
   /* reference pos is one pixel above the upper edge of the reference glyph */
@@ -4094,10 +4094,10 @@ u8g_uint_t u8g_font_calc_vref_top(u8g_t *u8g)
 
 void u8g_SetFontPosTop(u8g_t *u8g)
 {
-  u8g->font_calc_vref = u8g_font_calc_vref_top;
+  u8g->font_calc_vref = repetier_calc_vref_top;
 }
 
-u8g_uint_t u8g_font_calc_vref_center(u8g_t *u8g)
+u8g_uint_t repetier_calc_vref_center(u8g_t *u8g)
 {
   int8_t tmp;
   tmp = u8g->font_ref_ascent;
@@ -4110,26 +4110,26 @@ u8g_uint_t u8g_font_calc_vref_center(u8g_t *u8g)
 
 void u8g_SetFontPosCenter(u8g_t *u8g)
 {
-  u8g->font_calc_vref = u8g_font_calc_vref_center;
+  u8g->font_calc_vref = repetier_calc_vref_center;
 }
 
 /*========================================================================*/
 /* string pixel width calculation */
 
-char u8g_font_get_char(const void *s)
+char repetier_get_char(const void *s)
 {
   return *(const char *)(s);
 }
 
-char u8g_font_get_charP(const void *s)
+char repetier_get_charP(const void *s)
 {
   return u8g_pgm_read(s);
 }
 
-typedef char (*u8g_font_get_char_fn)(const void *s);
+typedef char (*repetier_get_char_fn)(const void *s);
 
 
-u8g_uint_t u8g_font_calc_str_pixel_width(u8g_t *u8g, const char *s, u8g_font_get_char_fn get_char )
+u8g_uint_t repetier_calc_str_pixel_width(u8g_t *u8g, const char *s, repetier_get_char_fn get_char )
 {
   u8g_uint_t  w;
   uint8_t enc;
@@ -4193,12 +4193,12 @@ u8g_uint_t u8g_font_calc_str_pixel_width(u8g_t *u8g, const char *s, u8g_font_get
 
 u8g_uint_t u8g_GetStrPixelWidth(u8g_t *u8g, const char *s)
 {
-  return u8g_font_calc_str_pixel_width(u8g, s, u8g_font_get_char);
+  return repetier_calc_str_pixel_width(u8g, s, repetier_get_char);
 }
 
 u8g_uint_t u8g_GetStrPixelWidthP(u8g_t *u8g, const u8g_pgm_uint8_t *s)
 {
-  return u8g_font_calc_str_pixel_width(u8g, (const char *)s, u8g_font_get_charP);
+  return repetier_calc_str_pixel_width(u8g, (const char *)s, repetier_get_charP);
 }
 
 int8_t u8g_GetStrX(u8g_t *u8g, const char *s)
@@ -4289,7 +4289,7 @@ struct u8g_str_size_struct
 };
 typedef struct u8g_str_size_struct u8g_str_size_t;
 
-static void u8g_font_calc_str_min_box(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
+static void repetier_calc_str_min_box(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
 {
   /* u8g_glyph_t g; */
   int8_t tmp;
@@ -4323,7 +4323,7 @@ static void u8g_font_calc_str_min_box(u8g_t *u8g, const char *s, u8g_str_size_t 
 
   /* assume that the string has size 2 or more, than start with negative offset-x */
   /* for string with size 1, this will be nullified after the loop */
-  // buf->w = - u8g_font_GetGlyphBBXOffX(u8g->font, g);
+  // buf->w = - repetier_GetGlyphBBXOffX(u8g->font, g);
   buf->w = - u8g->glyph_x;
 
   /* Also copy the position of the first glyph. This is the reference point of the string (negated) */
@@ -4359,31 +4359,31 @@ static void u8g_font_calc_str_min_box(u8g_t *u8g, const char *s, u8g_str_size_t 
   /* finally calculate the width of the last char */
   /* if g was not updated in the for loop (strlen() == 1), then the initial offset x gets removed */
   buf->w += u8g->glyph_width;
-  // buf->w += u8g_font_GetGlyphBBXOffX(u8g->font, g);
+  // buf->w += repetier_GetGlyphBBXOffX(u8g->font, g);
 
   buf->w += u8g->glyph_x;
 }
 
 /* calculate minimal box */
-void u8g_font_box_min(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
+void repetier_box_min(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
 {
-  u8g_font_calc_str_min_box(u8g, s, buf);
+  repetier_calc_str_min_box(u8g, s, buf);
 }
 
 /* calculate gA box, but do not calculate the overall width */
-void u8g_font_box_left_gA(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
+void repetier_box_left_gA(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
 {
 
 }
 
 /* calculate gA box, including overall width */
-void u8g_font_box_all_gA(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
+void repetier_box_all_gA(u8g_t *u8g, const char *s, u8g_str_size_t *buf)
 {
 
 }
 
 
-static void u8g_font_get_str_box_fill_args(u8g_t *u8g, const char *s, u8g_str_size_t *buf, u8g_uint_t *x, u8g_uint_t *y, u8g_uint_t *width, u8g_uint_t *height)
+static void repetier_get_str_box_fill_args(u8g_t *u8g, const char *s, u8g_str_size_t *buf, u8g_uint_t *x, u8g_uint_t *y, u8g_uint_t *width, u8g_uint_t *height)
 {
   /*
   u8g_glyph_t g;
@@ -4413,8 +4413,8 @@ void u8g_GetStrMinBox(u8g_t *u8g, const char *s, u8g_uint_t *x, u8g_uint_t *y, u
     return;
   }
 
-  u8g_font_calc_str_min_box(u8g, s, &buf);
-  u8g_font_get_str_box_fill_args(u8g, s, &buf, x, y, width, height);
+  repetier_calc_str_min_box(u8g, s, &buf);
+  repetier_get_str_box_fill_args(u8g, s, &buf, x, y, width, height);
 }
 
 
@@ -4430,11 +4430,11 @@ void u8g_GetStrAMinBox(u8g_t *u8g, const char *s, u8g_uint_t *x, u8g_uint_t *y, 
     return;
   }
 
-  cap_a = u8g_font_GetCapitalAHeight(u8g->font);
-  u8g_font_calc_str_min_box(u8g, s, &buf);
+  cap_a = repetier_GetCapitalAHeight(u8g->font);
+  repetier_calc_str_min_box(u8g, s, &buf);
   if ( buf.y_max < cap_a )
     buf.y_max = cap_a;
-  u8g_font_get_str_box_fill_args(u8g, s, &buf, x, y, width, height);
+  repetier_get_str_box_fill_args(u8g, s, &buf, x, y, width, height);
 }
 
 void u8g_SetFont(u8g_t *u8g, const u8g_fntpgm_uint8_t  *font)
@@ -4461,7 +4461,7 @@ int8_t u8g_draw_aa_glyph(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encodin
     u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
     if ( g == NULL  )
       return 0;
-    data = u8g_font_GetGlyphDataStart(u8g->font, g);
+    data = repetier_GetGlyphDataStart(u8g->font, g);
   }
 
   w = u8g->glyph_width;
@@ -4507,10 +4507,10 @@ u8g_uint_t u8g_DrawAAStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
   u8g_uint_t t = 0;
   int8_t d;
 
-  if ( u8g_font_GetFormat(u8g->font)  != 2 )
+  if ( repetier_GetFormat(u8g->font)  != 2 )
     return 0;
   //u8g_uint_t u8g_GetStrWidth(u8g, s);
-  //u8g_font_GetFontAscent(u8g->font)-u8g_font_GetFontDescent(u8g->font);
+  //repetier_GetFontAscent(u8g->font)-repetier_GetFontDescent(u8g->font);
 
   y += u8g->font_calc_vref(u8g);
 
@@ -5410,7 +5410,7 @@ static void u8g_init_data(u8g_t *u8g)
 
   u8g_SetFontPosBaseline(u8g);
 
-  u8g->font_height_mode = U8G_FONT_HEIGHT_MODE_XTEXT;
+  u8g->font_height_mode = repetier_HEIGHT_MODE_XTEXT;
   u8g->font_ref_ascent = 0;
   u8g->font_ref_descent = 0;
   u8g->font_line_spacing_factor = 64;           /* 64 = 1.0, 77 = 1.2 line spacing factor */

@@ -210,16 +210,16 @@ What display type do you use?
 #define UI_ACTION_SERVOPOS              1203
 #define UI_ACTION_IGNORE_M106           1204
 
-#define UI_ACTION_KAPTON				1205
-#define UI_ACTION_BLUETAPE				1206
-#define UI_ACTION_NOCOATING				1207
-#define UI_ACTION_PETTAPE				1208
-#define UI_ACTION_GLUESTICK				1209
-#define UI_ACTION_RESET_MATRIX			1210
-#define UI_ACTION_CALIBRATE				1211
-#define UI_ACTION_BED_LED_CHANGE		1212
-#define UI_ACTION_COATING_CUSTOM		1213
-#define UI_ACTION_BUILDTAK				1214
+#define UI_ACTION_KAPTON        1205
+#define UI_ACTION_BLUETAPE        1206
+#define UI_ACTION_NOCOATING       1207
+#define UI_ACTION_PETTAPE       1208
+#define UI_ACTION_GLUESTICK       1209
+#define UI_ACTION_RESET_MATRIX      1210
+#define UI_ACTION_CALIBRATE       1211
+#define UI_ACTION_BED_LED_CHANGE    1212
+#define UI_ACTION_COATING_CUSTOM    1213
+#define UI_ACTION_BUILDTAK        1214
 
 // 1700-1956 language selectors
 
@@ -244,13 +244,13 @@ What display type do you use?
 #define UI_ACTION_MENU_QUICKSETTINGS    4007
 #define UI_ACTION_MENU_EXTRUDER         4008
 #define UI_ACTION_MENU_POSITIONS        4009
-//#define UI_ACTION_SHOW_MEASUREMENT		4010
-//#define UI_ACTION_RESET_MEASUREMENT		4011
-#define UI_ACTION_SET_MEASURED_ORIGIN	4012
-#define UI_ACTION_SET_P1				4013
-#define UI_ACTION_SET_P2				4014
-#define UI_ACTION_SET_P3				4015
-#define UI_ACTION_CALC_LEVEL			4016
+//#define UI_ACTION_SHOW_MEASUREMENT    4010
+//#define UI_ACTION_RESET_MEASUREMENT   4011
+#define UI_ACTION_SET_MEASURED_ORIGIN 4012
+#define UI_ACTION_SET_P1        4013
+#define UI_ACTION_SET_P2        4014
+#define UI_ACTION_SET_P3        4015
+#define UI_ACTION_CALC_LEVEL      4016
 #define UI_ACTION_XOFF                  4020
 #define UI_ACTION_YOFF                  4021
 #define UI_ACTION_ZOFF                  4022
@@ -328,7 +328,7 @@ extern const int8_t encoder_table[16] PROGMEM ;
 #define UI_KEYS_INIT_BUTTON_HIGH(pin) SET_INPUT(pin);PULLUP(pin,LOW);
 
 #define UI_KEYS_CLICKENCODER_LOW(pinA,pinB)  uid.encoderLast = (uid.encoderLast << 2) & 0x0F;if (!READ(pinA)) uid.encoderLast |=2;if (!READ(pinB)) uid.encoderLast |=1; uid.encoderPos += pgm_read_byte(&encoder_table[uid.encoderLast]);
-#define UI_KEYS_CLICKENCODER_LOW_REV(pinA,pinB)  uid.encoderLast = (uid.encoderLast << 2) & 0x0F;if (!READ(pinA)) uid.encoderLast |=2;if (!READ(pinB)) uid.encoderLast |=1; uid.encoderPos -= pgm_read_byte(&encoder_table[uid.encoderLast]);
+#define UI_KEYS_CLICKENCODER_LOW_REV(pinA,pinB)   uid.encoderLast = (uid.encoderLast << 2) & 0x0F;if (!READ(pinA)) uid.encoderLast |=2;if (!READ(pinB)) uid.encoderLast |=1; uid.encoderPos -= pgm_read_byte(&encoder_table[uid.encoderLast]);
 #define UI_KEYS_BUTTON_LOW(pin,action_) if(READ(pin)==0) action=action_;
 #define UI_KEYS_CLICKENCODER_HIGH(pinA,pinB)  uid.encoderLast = (uid.encoderLast << 2) & 0x0F;if (READ(pinA)) uid.encoderLast |=2;if (READ(pinB)) uid.encoderLast |=1; uid.encoderPos += pgm_read_byte(&encoder_table[uid.encoderLast]);
 #define UI_KEYS_CLICKENCODER_HIGH_REV(pinA,pinB)  uid.encoderLast = (uid.encoderLast << 2) & 0x0F;if (READ(pinA)) uid.encoderLast |=2;if (READ(pinB)) uid.encoderLast |=1; uid.encoderPos -= pgm_read_byte(&encoder_table[uid.encoderLast]);
@@ -895,18 +895,18 @@ void uiCheckSlowKeys(int &action) {
 #define UI_DISPLAY_CHARSET 2
 #define UI_COLS 20
 #define UI_ROWS 4
-#define UI_DISPLAY_RS_PIN		63		// PINK.1, 88, D_RS
-#define UI_DISPLAY_RW_PIN		-1
-#define UI_DISPLAY_ENABLE_PIN	        65		// PINK.3, 86, D_E
-#define UI_DISPLAY_D0_PIN		59		// PINF.5, 92, D_D4
-#define UI_DISPLAY_D1_PIN		64		// PINK.2, 87, D_D5
-#define UI_DISPLAY_D2_PIN		44		// PINL.5, 40, D_D6
-#define UI_DISPLAY_D3_PIN		66		// PINK.4, 85, D_D7
-#define UI_DISPLAY_D4_PIN		59		// PINF.5, 92, D_D4
-#define UI_DISPLAY_D5_PIN		64		// PINK.2, 87, D_D5
-#define UI_DISPLAY_D6_PIN		44		// PINL.5, 40, D_D6
-#define UI_DISPLAY_D7_PIN		66		// PINK.4, 85, D_D7
-#define UI_DELAYPERCHAR		   50
+#define UI_DISPLAY_RS_PIN   63    // PINK.1, 88, D_RS
+#define UI_DISPLAY_RW_PIN   -1
+#define UI_DISPLAY_ENABLE_PIN         65    // PINK.3, 86, D_E
+#define UI_DISPLAY_D0_PIN   59    // PINF.5, 92, D_D4
+#define UI_DISPLAY_D1_PIN   64    // PINK.2, 87, D_D5
+#define UI_DISPLAY_D2_PIN   44    // PINL.5, 40, D_D6
+#define UI_DISPLAY_D3_PIN   66    // PINK.4, 85, D_D7
+#define UI_DISPLAY_D4_PIN   59    // PINF.5, 92, D_D4
+#define UI_DISPLAY_D5_PIN   64    // PINK.2, 87, D_D5
+#define UI_DISPLAY_D6_PIN   44    // PINL.5, 40, D_D6
+#define UI_DISPLAY_D7_PIN   66    // PINK.4, 85, D_D7
+#define UI_DELAYPERCHAR      50
 #define UI_INVERT_MENU_DIRECTION 0
 #if UI_MAIN
 void uiInitKeys() {
@@ -1402,7 +1402,7 @@ UI_KEYS_I2C_BUTTON_LOW(_BV(2),UI_ACTION_NEXT); // down button
 #endif // Controller 14
 
  /*
- 	Sanguinololu + panelolu2
+  Sanguinololu + panelolu2
  */
 #if FEATURE_CONTROLLER == CONTROLLER_SANGUINOLOLU_PANELOLU2
 #define UI_HAS_KEYS 1
@@ -1427,17 +1427,17 @@ UI_KEYS_I2C_BUTTON_LOW(_BV(2),UI_ACTION_NEXT); // down button
 #define BEEPER_ADDRESS UI_DISPLAY_I2C_ADDRESS
 #define COMPILE_I2C_DRIVER
 
-#define UI_DISPLAY_RS_PIN 		_BV(15)
-#define UI_DISPLAY_RW_PIN 		_BV(14)
-#define UI_DISPLAY_ENABLE_PIN 	_BV(13)
-#define UI_DISPLAY_D0_PIN 		_BV(12)
-#define UI_DISPLAY_D1_PIN 		_BV(11)
-#define UI_DISPLAY_D2_PIN 		_BV(10)
-#define UI_DISPLAY_D3_PIN 		_BV(9)
-#define UI_DISPLAY_D4_PIN 		_BV(12)
-#define UI_DISPLAY_D5_PIN 		_BV(11)
-#define UI_DISPLAY_D6_PIN 		_BV(10)
-#define UI_DISPLAY_D7_PIN 		_BV(9)
+#define UI_DISPLAY_RS_PIN     _BV(15)
+#define UI_DISPLAY_RW_PIN     _BV(14)
+#define UI_DISPLAY_ENABLE_PIN   _BV(13)
+#define UI_DISPLAY_D0_PIN     _BV(12)
+#define UI_DISPLAY_D1_PIN     _BV(11)
+#define UI_DISPLAY_D2_PIN     _BV(10)
+#define UI_DISPLAY_D3_PIN     _BV(9)
+#define UI_DISPLAY_D4_PIN     _BV(12)
+#define UI_DISPLAY_D5_PIN     _BV(11)
+#define UI_DISPLAY_D6_PIN     _BV(10)
+#define UI_DISPLAY_D7_PIN     _BV(9)
 #define BEEPER_PIN _BV(5)
 #define UI_I2C_HEATBED_LED    _BV(8)
 #define UI_I2C_HOTEND_LED     _BV(7)
@@ -1445,13 +1445,13 @@ UI_KEYS_I2C_BUTTON_LOW(_BV(2),UI_ACTION_NEXT); // down button
 
 #ifdef UI_MAIN
 void uiInitKeys() {
-	UI_KEYS_INIT_CLICKENCODER_LOW(10,11); // click encoder on pins 47 and 45. Phase is connected with gnd for signals.
-	UI_KEYS_INIT_BUTTON_LOW(30); // push button, connects gnd to pin
+  UI_KEYS_INIT_CLICKENCODER_LOW(10,11); // click encoder on pins 47 and 45. Phase is connected with gnd for signals.
+  UI_KEYS_INIT_BUTTON_LOW(30); // push button, connects gnd to pin
 }
 
 void uiCheckKeys(int &action) {
-	 UI_KEYS_CLICKENCODER_LOW_REV(10,11); // click encoder on pins 47 and 45. Phase is connected with gnd for signals.
-	 UI_KEYS_BUTTON_LOW(30,UI_ACTION_OK); // push button, connects gnd to pin
+   UI_KEYS_CLICKENCODER_LOW_REV(10,11); // click encoder on pins 47 and 45. Phase is connected with gnd for signals.
+   UI_KEYS_BUTTON_LOW(30,UI_ACTION_OK); // push button, connects gnd to pin
 }
 
 inline void uiCheckSlowEncoder() {}
@@ -1601,18 +1601,18 @@ void uiCheckSlowKeys(int &action) {}
 //calculate rows and cols available with current font
 #define UI_COLS (UI_LCD_WIDTH/UI_FONT_WIDTH)
 #define UI_ROWS (UI_LCD_HEIGHT/UI_FONT_HEIGHT)
-#define UI_DISPLAY_RS_PIN		25		// PINK.1, 88, D_RS
-#define UI_DISPLAY_RW_PIN		-1
-#define UI_DISPLAY_ENABLE_PIN	        27		// PINK.3, 86, D_E
-#define UI_DISPLAY_D0_PIN		-1		// PINF.5, 92, D_D4
-#define UI_DISPLAY_D1_PIN		-1		// PINK.2, 87, D_D5
-#define UI_DISPLAY_D2_PIN		-1		// PINL.5, 40, D_D6
-#define UI_DISPLAY_D3_PIN		-1		// PINK.4, 85, D_D7
-#define UI_DISPLAY_D4_PIN		29		// PINF.5, 92, D_D4
-#define UI_DISPLAY_D5_PIN		-1		// PINK.2, 87, D_D5
-#define UI_DISPLAY_D6_PIN		-1		// PINL.5, 40, D_D6
-#define UI_DISPLAY_D7_PIN		-1		// PINK.4, 85, D_D7
-#define UI_DELAYPERCHAR		   50
+#define UI_DISPLAY_RS_PIN   25    // PINK.1, 88, D_RS
+#define UI_DISPLAY_RW_PIN   -1
+#define UI_DISPLAY_ENABLE_PIN         27    // PINK.3, 86, D_E
+#define UI_DISPLAY_D0_PIN   -1    // PINF.5, 92, D_D4
+#define UI_DISPLAY_D1_PIN   -1    // PINK.2, 87, D_D5
+#define UI_DISPLAY_D2_PIN   -1    // PINL.5, 40, D_D6
+#define UI_DISPLAY_D3_PIN   -1    // PINK.4, 85, D_D7
+#define UI_DISPLAY_D4_PIN   29    // PINF.5, 92, D_D4
+#define UI_DISPLAY_D5_PIN   -1    // PINK.2, 87, D_D5
+#define UI_DISPLAY_D6_PIN   -1    // PINL.5, 40, D_D6
+#define UI_DISPLAY_D7_PIN   -1    // PINK.4, 85, D_D7
+#define UI_DELAYPERCHAR      50
 #define UI_HAS_KEYS 1
 #define UI_HAS_BACK_KEY 0
 #define UI_INVERT_MENU_DIRECTION 0
@@ -1762,18 +1762,18 @@ void uiCheckSlowKeys(int &action) {}
 #define UI_HAS_BACK_KEY 0
 #define UI_INVERT_MENU_DIRECTION 1
 #define UI_DISPLAY_CHARSET 1
-#define UI_DISPLAY_RS_PIN		42		// PINK.1, 88, D_RS
-#define UI_DISPLAY_RW_PIN		-1
-#define UI_DISPLAY_ENABLE_PIN	43		// PINK.3, 86, D_E
-#define UI_DISPLAY_D0_PIN		44		// PINF.5, 92, D_D4
-#define UI_DISPLAY_D1_PIN		45		// PINK.2, 87, D_D5
-#define UI_DISPLAY_D2_PIN		46		// PINL.5, 40, D_D6
-#define UI_DISPLAY_D3_PIN		47		// PINK.4, 85, D_D7
-#define UI_DISPLAY_D4_PIN		44		// PINF.5, 92, D_D4
-#define UI_DISPLAY_D5_PIN		45		// PINK.2, 87, D_D5
-#define UI_DISPLAY_D6_PIN		46		// PINL.5, 40, D_D6
-#define UI_DISPLAY_D7_PIN		47		// PINK.4, 85, D_D7
-#define UI_DELAYPERCHAR		   50
+#define UI_DISPLAY_RS_PIN   42    // PINK.1, 88, D_RS
+#define UI_DISPLAY_RW_PIN   -1
+#define UI_DISPLAY_ENABLE_PIN 43    // PINK.3, 86, D_E
+#define UI_DISPLAY_D0_PIN   44    // PINF.5, 92, D_D4
+#define UI_DISPLAY_D1_PIN   45    // PINK.2, 87, D_D5
+#define UI_DISPLAY_D2_PIN   46    // PINL.5, 40, D_D6
+#define UI_DISPLAY_D3_PIN   47    // PINK.4, 85, D_D7
+#define UI_DISPLAY_D4_PIN   44    // PINF.5, 92, D_D4
+#define UI_DISPLAY_D5_PIN   45    // PINK.2, 87, D_D5
+#define UI_DISPLAY_D6_PIN   46    // PINL.5, 40, D_D6
+#define UI_DISPLAY_D7_PIN   47    // PINK.4, 85, D_D7
+#define UI_DELAYPERCHAR      50
 
 #if UI_MAIN
 void uiInitKeys() {

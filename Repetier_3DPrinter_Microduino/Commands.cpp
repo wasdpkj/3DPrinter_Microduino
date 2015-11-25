@@ -217,7 +217,6 @@ void Commands::changeFeedrateMultiply(int factor)
     Printer::feedrateMultiply = factor;
     Com::printFLN(Com::tSpeedMultiply, factor);
 }
-
 void Commands::changeFlowrateMultiply(int factor)
 {
     if(factor < 25) factor = 25;

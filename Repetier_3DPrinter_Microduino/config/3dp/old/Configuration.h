@@ -37,7 +37,7 @@
 */
 
 #define NUM_EXTRUDER 0
-#define MOTHERBOARD 62
+#define MOTHERBOARD 6
 #include "pins.h"
 
 // ################## EDIT THESE SETTINGS MANUALLY ################
@@ -493,7 +493,7 @@ Values must be in range 1..255
     "xMaxEndstop": 0,
     "yMaxEndstop": 0,
     "zMaxEndstop": 0,
-    "motherboard": 62,
+    "motherboard": 6,
     "driveSystem": 0,
     "xMaxSpeed": 400,
     "xHomingSpeed": 20,

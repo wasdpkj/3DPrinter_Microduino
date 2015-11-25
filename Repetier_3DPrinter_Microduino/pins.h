@@ -814,8 +814,10 @@ STEPPER_CURRENT_CONTROL
 * Sanguinololu pin assignment
 *
 ****************************************************************************************/
+//#define MicroduinoVersion_V2  //2
+
 #if MOTHERBOARD == 62
-#define SANGUINOLOLU_V_1_2
+#define MicroduinoVersion_V2
 #endif
 
 #if MOTHERBOARD == 6 || MOTHERBOARD == 62 || MOTHERBOARD == 65
@@ -843,22 +845,48 @@ STEPPER_CURRENT_CONTROL
 #define ORIG_E0_STEP_PIN         23
 #define ORIG_E0_DIR_PIN          22
 
+#ifdef MicroduinoVersion_V2
 #define LED_PIN            -1
+#else
+#define LED_PIN            25 //A1
+#endif
 
+#ifdef MicroduinoVersion_V2
+#define BEEPER_PIN -1
+#else
+#define BEEPER_PIN 29
+#endif
+
+#ifdef MicroduinoVersion_V2
+#define ORIG_FAN_PIN            8
+#else
 #define ORIG_FAN_PIN            10
-
-#define ORIG_PS_ON_PIN          -1
+#endif
 
 #define HEATER_0_PIN       9 // (extruder)
 
+#ifdef MicroduinoVersion_V2
+#define HEATER_1_PIN       10 // (bed)
+#else
 #define HEATER_1_PIN       8 // (bed)
+#endif
+
+#define ORIG_PS_ON_PIN          -1
+
+#ifdef MicroduinoVersion_V2
+#define ORIG_X_ENABLE_PIN       28
+#define ORIG_Y_ENABLE_PIN       28
+#define ORIG_Z_ENABLE_PIN       29
+#define ORIG_E0_ENABLE_PIN      28
+#else
 #define ORIG_X_ENABLE_PIN       26
 #define ORIG_Y_ENABLE_PIN       26
 #define ORIG_Z_ENABLE_PIN       27
 #define ORIG_E0_ENABLE_PIN      26
+#endif
 
-#define TEMP_0_PIN          0   // MUST USE ANALOG INPUT NUMBERING NOT DIGITAL OUTPUT NUMBERING!!!!!!!!! (pin 33 extruder)
-#define TEMP_1_PIN          1   // MUST USE ANALOG INPUT NUMBERING NOT DIGITAL OUTPUT NUMBERING!!!!!!!!! (pin 34 bed)
+#define TEMP_0_PIN          0   // MUST USE ANALOG INPUT NUMBERING NOT DIGITAL OUTPUT NUMBERING!!!!!!!!! (pin A7 extruder)
+#define TEMP_1_PIN          1   // MUST USE ANALOG INPUT NUMBERING NOT DIGITAL OUTPUT NUMBERING!!!!!!!!! (pin A6 bed)
 #define SDPOWER          -1
 #define SDSS          7
 #define SCK_PIN          13
@@ -867,6 +895,16 @@ STEPPER_CURRENT_CONTROL
 #define HEATER_2_PIN   -1
 #define TEMP_2_PIN     -1
 
+#ifdef MicroduinoVersion_V2
+//buttons are directly attached
+#define UI_ENCODER_CLICK 25  //A1,the click
+#define UI_ENCODER_A 26  //A2
+#define UI_ENCODER_B 27  //A3
+#else
+#define UI_ENCODER_CLICK 28  //A4,the click
+#define UI_ENCODER_A 2
+#define UI_ENCODER_B 3
+#endif
 
 #define E0_PINS ORIG_E0_STEP_PIN,ORIG_E0_DIR_PIN,ORIG_E0_ENABLE_PIN,
 #define E1_PINS
@@ -1880,6 +1918,7 @@ STEPPER_CURRENT_CONTROL
 #define BEEPER_PIN -1
 
 #define ORIG_SDCARDDETECT -1 // Megatronics does not use this port
+
 #define E0_PINS ORIG_E0_STEP_PIN,ORIG_E0_DIR_PIN,ORIG_E0_ENABLE_PIN,
 #define E1_PINS ORIG_E1_STEP_PIN,ORIG_E1_DIR_PIN,ORIG_E1_ENABLE_PIN,
 #define E2_PINS

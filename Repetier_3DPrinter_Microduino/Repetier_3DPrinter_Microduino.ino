@@ -145,7 +145,8 @@ Custom M Codes
 - M602 S<1/0> P<1/0>- Debug jam control (S) Disable jam control (P). If enabled it will log signal changes and will not trigger jam errors!
 - M908 P<address> S<value> : Set stepper current for digipot (RAMBO board)
 */
-
+//pkj ui
+//#include <U8glib.h>
 #include "Repetier.h"
 #include <SPI.h>
 

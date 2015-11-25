@@ -1155,17 +1155,10 @@
 *
 ****************************************************************************************/
 //pkj
-#if MB(MELZI) || MB(MELZI_1284)
-#define MELZI
-#endif
-#if MB(AZTEEG_X1)
-#define AZTEEG_X1
-#endif
-
-#if MB(SANGUINOLOLU_12) || MB(MELZI) || MB(STB_11) || MB(AZTEEG_X1) || MB(MELZI_1284)
+#if MB(SANGUINOLOLU_12)
 #undef MOTHERBOARD
 #define MOTHERBOARD BOARD_SANGUINOLOLU_11
-#define SANGUINOLOLU_V_1_2
+#define MicroduinoVersion_V2
 
 #if defined(__AVR_ATmega1284P__)
   #define LARGE_FLASH true
@@ -1197,9 +1190,17 @@
     #define E0_STEP_PIN      23
     #define E0_DIR_PIN       22
 
-    #define LED_PIN          -1
+#ifdef MicroduinoVersion_V2
+    #define LED_PIN            -1
+#else
+    #define LED_PIN            25 //A1
+#endif
 
+#ifdef MicroduinoVersion_V2
+    #define FAN_PIN          8
+#else
     #define FAN_PIN          10
+#endif
   //  #define FAN_SOFT_PWM
 
 #ifdef NUM_SERVOS
@@ -1226,13 +1227,23 @@
     #define HEATER_2_PIN    -1
 
 
+#ifdef MicroduinoVersion_V2
+    #define HEATER_BED_PIN  10  // (bed)
+#else
     #define HEATER_BED_PIN  8  // (bed)
+#endif
 
+#ifdef MicroduinoVersion_V2
+    #define X_ENABLE_PIN    28  //28,A4
+    #define Y_ENABLE_PIN    28  //28,A4
+    #define Z_ENABLE_PIN    29  //29,A5
+    #define E0_ENABLE_PIN   28  //28,A4
+#else
     #define X_ENABLE_PIN    26  //26,A2
     #define Y_ENABLE_PIN    26  //26,A2
     #define Z_ENABLE_PIN    27  //27,A3
     #define E0_ENABLE_PIN   26  //26,A2
-
+#endif
 
     #define TEMP_0_PIN       0   //ADC0,A7,MUST USE ANALOG INPUT NUMBERING NOT DIGITAL OUTPUT NUMBERING!!!!!!!!! 
     #define TEMP_1_PIN      -1
@@ -1243,16 +1254,26 @@
 
 
  #ifdef MICRODUINO_FULL_GRAPHIC_SMART_CONTROLLER
+#ifdef MicroduinoVersion_V2
+     #define BEEPER -1
+#else
      #define BEEPER 29  //29,A5
+#endif
      // Uncomment screen orientation
      #define LCD_SCREEN_ROT_0
        // #define LCD_SCREEN_ROT_90
        // #define LCD_SCREEN_ROT_180
        // #define LCD_SCREEN_ROT_270
      //buttons are directly attached
+#ifdef MicroduinoVersion_V2
+    #define BTN_ENC 25  //A1,the click
+    #define BTN_EN1 26  //A2
+    #define BTN_EN2 27  //A3
+#else
+    #define BTN_ENC 28  //28,A4,the click
     #define BTN_EN1 2
     #define BTN_EN2 3
-    #define BTN_ENC 28  //28,A4,the click
+#endif
      //not connected to a pin
      #define SDCARDDETECT -1  //24,A0,must jump "R2" for Microduino SD module
  #endif //Makrpanel

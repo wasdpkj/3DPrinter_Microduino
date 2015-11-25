@@ -46,7 +46,7 @@
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
 //pkj
-  #define MOTHERBOARD BOARD_SANGUINOLOLU_12
+  #define MOTHERBOARD BOARD_SANGUINOLOLU_12   //Microduino _V11 or _V12
 #endif
 
 // Define this to set a custom name for your generic Mendel,
