@@ -45,10 +45,10 @@ M82 ; Extruder in absolute mode
 ; Activate all used extruder
 {IF_EXT0}M104 T0 S{TEMP0}
 G92 E0                  ;zero the extruded length
-G1 F200 E30             ;extrude 3mm of feed stock
-G92 E0                  ;zero the extruded length again
 ; Wait for all used extruders to reach temperature
 {IF_EXT0}M109 T0 S{TEMP0}
+G1 F200 E30             ;extrude 3mm of feed stock
+G92 E0                  ;zero the extruded length again
 """
 endGCode = """
 ; Default end code
@@ -59,6 +59,7 @@ G91 ; Relative positioning
 {IF_EXT0}T0
 {IF_EXT0}G1 E-1 ; Reduce filament pressure
 M104 T0 S0
+G28 X0 Y0 ;move X/Y to min endstops, so the head is out of the way
 G90 ; Absolute positioning
 G92 E0 ; Reset extruder position
 M140 S0 ; Disable heated bed

@@ -1204,10 +1204,18 @@
   //  #define FAN_SOFT_PWM
 
 #ifdef NUM_SERVOS
+#ifdef MicroduinoVersion_V2
+  #define SERVO0_PIN          3
+#else
   #define SERVO0_PIN          -1
+#endif
 
   #if NUM_SERVOS > 1
+#ifdef MicroduinoVersion_V2
+    #define SERVO1_PIN        2
+#else
     #define SERVO1_PIN        -1
+#endif
   #endif
 
   #if NUM_SERVOS > 2
